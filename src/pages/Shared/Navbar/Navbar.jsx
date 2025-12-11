@@ -14,7 +14,7 @@ import Logo from "../../../components/Logo/Logo";
   const hoverColorClass = "hover:text-[#4FAE33]";
 
   return (
-    <div className="w-full bg-base-100 shadow-lg">
+    <div className="w-full bg-base-200 shadow-lg">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         <div className="flex items-center justify-between h-16">
           <Logo></Logo>
