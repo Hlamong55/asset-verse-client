@@ -1,16 +1,18 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaChartBar, FaCheckCircle, FaClipboardList, FaCogs, FaMoneyBillWave, FaStar } from "react-icons/fa";
 import { Link } from "react-router";
 
-  const Banner = () => {
-
-     const overlayColor = "rgba(255,255,255,0.30)"; // white glassy overlay (use rgba for fine control)
-  const overlayBlur = "8px"; // CSS blur amount for backdrop-filter
+const Banner = () => {
+  const overlayColor = "rgba(255,255,255,0.30)";
+  const overlayBlur = "8px";
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { staggerChildren: 0.12, when: "beforeChildren" } },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.12, when: "beforeChildren" },
+    },
   };
 
   const itemUp = {
@@ -19,7 +21,7 @@ import { Link } from "react-router";
   };
 
   return (
-        <section
+    <section
       className="relative overflow-hidden"
       style={{
         backgroundImage: `url(https://i.ibb.co.com/XkxsFRtP/A-vibrant-dynamic-illustration-of-a-comprehensive-B2-B-lead-generation-funnel-showcasing-the-1024x585.webp})`,
@@ -28,7 +30,6 @@ import { Link } from "react-router";
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* GLASSY OVERLAY */}
       <div
         aria-hidden
         className="absolute inset-0"
@@ -41,7 +42,7 @@ import { Link } from "react-router";
 
       <svg
         aria-hidden
-        className="pointer-events-none absolute -right-28 -top-28 w-[520px] h-[420px] opacity-20"
+        className="pointer-events-none absolute -right-28 -top-28 w-[520px] h-[400px] opacity-20"
         viewBox="0 0 600 600"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +51,7 @@ import { Link } from "react-router";
         <circle cx="420" cy="180" r="120" fill="#4FAE33" />
       </svg>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-24 ">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-14 ">
         <div className="min-h-[360px] flex items-center justify-center">
           <motion.div
             className="w-full max-w-2xl text-center"
@@ -60,7 +61,7 @@ import { Link } from "react-router";
           >
             <motion.h1
               variants={itemUp}
-              className="text-4xl md:text-5xl font-extrabold leading-tight text-gray-900"
+              className="text-4xl md:text-5xl font-extrabold leading-tight text-white"
             >
               Smart & Secure{" "}
               <span className="text-[#2563eb]">Asset Management</span>{" "}
@@ -71,9 +72,9 @@ import { Link } from "react-router";
               variants={itemUp}
               className="mt-4 text-gray-800 font-medium text-base md:text-lg max-w-3xl mx-auto"
             >
-              AssetVerse helps HR teams track, assign, and manage company assets with
-              complete visibility and zero hassle. Automate workflows, reduce loss,
-              and get real-time insights.
+              AssetVerse helps HR teams track, assign, and manage company assets
+              with complete visibility and zero hassle. Automate workflows,
+              reduce loss, and get real-time insights.
             </motion.p>
 
             <motion.div
@@ -87,7 +88,9 @@ import { Link } from "react-router";
                   transition={{ type: "spring", stiffness: 260, damping: 20 }}
                   className="btn btn-primary py-6 text-lg"
                 >
-                  <span className="flex items-center gap-2">Sign Up for Free <FaArrowRight /></span>
+                  <span className="flex items-center gap-2">
+                    Sign Up for Free <FaArrowRight />
+                  </span>
                 </motion.button>
               </Link>
 
@@ -98,19 +101,70 @@ import { Link } from "react-router";
                   transition={{ type: "spring", stiffness: 260, damping: 20 }}
                   className="btn btn-outline py-6 text-lg hover:border-[#4FAE33] hover:text-[#4FAE33]"
                 >
-                  <span className="flex items-center gap-2">Request Demo <FaArrowRight /></span>
+                  <span className="flex items-center gap-2">
+                    Request Demo <FaArrowRight />
+                  </span>
                 </motion.button>
               </Link>
             </motion.div>
 
             <motion.div
               variants={itemUp}
-              className="mt-6 flex flex-wrap gap-3 justify-center"
+              className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 justify-center"
             >
-              <span className="badge badge-soft badge-success">Asset Analytics</span>
-              <span className="badge badge-soft badge-success">Inventory</span>
-              <span className="badge badge-soft badge-success">Request Workflow</span>
-              <span className="badge badge-soft badge-success">Return Tracking</span>
+              <div className="flex flex-col items-center text-center">
+                <div className="flex items-center justify-center w-12 h-12 rounded-md border-2 text-white">
+                  <FaChartBar className="w-6 h-6" />
+                </div>
+                <span className="mt-2 text-sm font-semibold text-black">
+                  HR Insights & Reporting
+                </span>
+              </div>
+
+              <div className="flex flex-col items-center text-center">
+                <div className="flex items-center justify-center w-12 h-12 rounded-md border-2 text-white">
+                  <FaClipboardList className="w-6 h-6" />
+                </div>
+                <span className="mt-2 text-sm font-semibold text-black">
+                  Asset & Assignment Tracking
+                </span>
+              </div>
+
+              <div className="flex flex-col items-center text-center">
+                <div className="flex items-center justify-center w-12 h-12 rounded-md border-2  text-white">
+                  <FaCogs className="w-6 h-6" />
+                </div>
+                <span className="mt-2 text-sm font-semibold text-black">
+                  Asset Lifecycle Management
+                </span>
+              </div>
+
+              <div className="flex flex-col items-center text-center">
+                <div className="flex items-center justify-center w-12 h-12 rounded-md border-2  text-white">
+                  <FaStar className="w-6 h-6" />
+                </div>
+                <span className="mt-2 text-sm font-semibold text-black">
+                  Employee Experience
+                </span>
+              </div>
+
+              <div className="flex flex-col items-center text-center">
+                <div className="flex items-center justify-center w-12 h-12 rounded-md border-2  text-white">
+                  <FaCheckCircle className="w-6 h-6" />
+                </div>
+                <span className="mt-2 text-sm font-semibold text-black">
+                  Request & Approval Workflow
+                </span>
+              </div>
+
+              <div className="flex flex-col items-center text-center">
+                <div className="flex items-center justify-center w-12 h-12 rounded-md border-2  text-white">
+                  <FaMoneyBillWave className="w-6 h-6" />
+                </div>
+                <span className="mt-2 text-sm font-semibold text-black">
+                  Asset Cost & Budget Tracking
+                </span>
+              </div>
             </motion.div>
           </motion.div>
         </div>
@@ -118,6 +172,5 @@ import { Link } from "react-router";
     </section>
   );
 };
-
 
 export default Banner;

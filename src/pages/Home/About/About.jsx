@@ -45,12 +45,12 @@ const itemVariants = {
 
 const About = () => {
   return (
-    <section className="bg-base-100 py-16">
+    <section className="bg-base-100 py-10">
       <div className="max-w-7xl mx-auto px-6">
         <div className="md:grid md:grid-cols-2 items-center">
        
           <div className="mb-8 md:mb-0">
-            <h2 className="mt-2 text-3xl md:text-4xl font-extrabold text-gray-900">
+            <h2 className="mt-2 text-3xl md:text-4xl font-extrabold text-gray-800">
               Why choose Asset<span className="text-primary">Verse</span>?
             </h2>
             <p className="mt-4 text-gray-800 max-w-xl">
