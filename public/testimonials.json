@@ -1,0 +1,101 @@
+{
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Maya Rahman",
+      "role": "HR Lead, NovaTech",
+      "quote": "AssetVerse made our asset audits effortless. We reduced missing equipment by 72% within 3 months.",
+      "rating": 5,
+      "avatar": "https://i.pravatar.cc/150?img=47"
+    },
+    {
+      "id": 2,
+      "name": "Arif Khan",
+      "role": "IT Manager, BrightWorks",
+      "quote": "Approval workflows and quick assignment saved us hours every week. The inventory view is excellent.",
+      "rating": 5,
+      "avatar": "https://i.pravatar.cc/150?img=12"
+    },
+    {
+      "id": 3,
+      "name": "Saba Ahmed",
+      "role": "Operations, CloudServe",
+      "quote": "Multi-company support is a game changer for contractors — seamless and reliable.",
+      "rating": 4,
+      "avatar": "https://i.pravatar.cc/150?img=32"
+    },
+    {
+      "id": 4,
+      "name": "Rifat Chowdhury",
+      "role": "Office Manager, Gridline",
+      "quote": "The return tracking feature cut down our lost-items overhead significantly. Very user friendly.",
+      "rating": 5,
+      "avatar": "https://i.pravatar.cc/150?img=55"
+    },
+    {
+      "id": 5,
+      "name": "Nazma Begum",
+      "role": "HR Manager, AlignCorp",
+      "quote": "Reports and analytics helped us optimize asset allocation across departments.",
+      "rating": 5,
+      "avatar": "https://i.pravatar.cc/150?img=56"
+    },
+    {
+      "id": 6,
+      "name": "Imran Hossain",
+      "role": "IT Support, BlueWave",
+      "quote": "Assigning assets directly to employees is fast and reliable — reduced manual work a lot.",
+      "rating": 4,
+      "avatar": "https://i.pravatar.cc/150?img=60"
+    },
+    {
+      "id": 7,
+      "name": "Lina Karim",
+      "role": "People Ops, StellarWorks",
+      "quote": "Employee onboarding plus asset provisioning now happens on day one. Great for scaling teams.",
+      "rating": 5,
+      "avatar": "https://i.pravatar.cc/150?img=15"
+    },
+    {
+      "id": 8,
+      "name": "Tariq Aziz",
+      "role": "Facilities Lead, CoreBuild",
+      "quote": "Inventory reconciliation is painless. The condition history is particularly useful for audits.",
+      "rating": 4,
+      "avatar": "https://i.pravatar.cc/150?img=28"
+    },
+    {
+      "id": 9,
+      "name": "Farhana Sultana",
+      "role": "HR Director, Meridian",
+      "quote": "The package upgrade flow with Stripe was smooth and immediate—no downtime or data issues.",
+      "rating": 5,
+      "avatar": "https://i.pravatar.cc/150?img=68"
+    },
+    {
+      "id": 10,
+      "name": "Zillur Rahman",
+      "role": "CTO, NimbusLab",
+      "quote": "Secure role-based access and easy integrations made AssetVerse production-ready for us.",
+      "rating": 5,
+      "avatar": "https://i.pravatar.cc/150?img=70"
+    }
+  ],
+
+  "stats": [
+    { "id": "companies", "label": "Companies Trust Us", "value": 120 },
+    { "id": "assets", "label": "Assets Tracked", "value": 8400 },
+    { "id": "fulfillment", "label": "Request Fulfillment (%)", "value": 97 },
+    { "id": "uptime", "label": "Avg. HR Time Saved (hrs/mo)", "value": 28 }
+  ],
+
+  "trust_logos": [
+  "https://upload.wikimedia.org/wikipedia/commons/a/ab/Apple-logo.png",
+  "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
+  "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg",
+  "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+  "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
+  "https://upload.wikimedia.org/wikipedia/commons/1/19/Adobe_Corporate_Logo.png"
+]
+
+}
