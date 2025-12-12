@@ -46,7 +46,7 @@ const itemVariants = {
 const About = () => {
   return (
     <section className="bg-base-100 py-12">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto p-6">
         <div className="md:grid md:grid-cols-2 items-center">
        
           <div className="mb-8 md:mb-0">

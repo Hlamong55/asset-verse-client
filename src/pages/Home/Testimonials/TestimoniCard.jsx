@@ -42,7 +42,7 @@ const TestimoniCard = ({ review }) => {
             </div>
           )}
 
-          <FaCheckCircle className="absolute -bottom-1.5 -right-1 text-[#2563eb] bg-white rounded-full text-lg" />
+          <FaCheckCircle className="absolute -bottom-1.5 -right-1 text-primary bg-white rounded-full text-lg" />
         </div>
 
         <div className="min-w-0">

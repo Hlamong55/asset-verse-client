@@ -24,15 +24,18 @@ const Testimonials = ({ testimonialsPromise }) => {
   return (
     <section className="py-20 bg-base-100">
       <div className="max-w-7xl mx-auto px-6">
-
         {/* heading text */}
         <div className="text-center mb-10">
-          <p className="text-sm font-semibold text-[#2563eb]">Customer Experience</p>
+          <p className="text-sm font-semibold text-[#2563eb]">
+            Customer Experience
+          </p>
           <h2 className="text-3xl md:text-4xl font-extrabold mt-2">
-            What companies say about Asset<span className="text-primary">Verse</span>
+            What companies say about Asset
+            <span className="text-primary">Verse</span>
           </h2>
           <p className="mt-3 text-gray-600 max-w-2xl mx-auto">
-            Built for HR, IT & Operations teams to track, assign and protect company assets at scale.
+            Built for HR, IT & Operations teams to track, assign and protect
+            company assets at scale.
           </p>
         </div>
 
@@ -63,11 +66,11 @@ const Testimonials = ({ testimonialsPromise }) => {
             320: { slidesPerView: 1, spaceBetween: 16 },
             640: { slidesPerView: 1.2, spaceBetween: 18 },
             768: { slidesPerView: 2, spaceBetween: 20 },
-            1024: { slidesPerView: 3, spaceBetween: 24 }
+            1024: { slidesPerView: 3, spaceBetween: 24 },
           }}
         >
           {testimonials.map((t) => (
-            <SwiperSlide key={t.id} className="py-7">
+            <SwiperSlide key={t.id} className="py-8">
               <div className="transform transition-all hover:scale-[1.02] duration-300">
                 <TestimoniCard review={t} />
               </div>
@@ -76,19 +79,51 @@ const Testimonials = ({ testimonialsPromise }) => {
         </Swiper>
 
         {trust_logos && (
-          <div className="mt-14 text-center">
-            <p className="text-sm font-semibold text-[#2563eb] mb-4">Trusted by leading companies</p>
+          <div className="mt-12 text-center">
+            <p className="text-sm font-semibold text-[#2563eb] mb-4">
+              Trusted by leading companies
+            </p>
 
-            <div className="flex flex-wrap justify-center items-center gap-6 bg-white p-5 rounded-xl border border-base-200 shadow-sm">
-              {trust_logos.map((img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  alt={`logo-${index}`}
-                  className="w-24 h-8 object-contain opacity-80 hover:opacity-100 transition"
-                />
-              ))}
+           <div className="overflow-hidden py-6 relative">
+            <style>
+            {`
+            @keyframes smoothMarquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+            }`}
+            </style>
+
+            <div className="flex w-max whitespace-nowrap">
+            <div
+            className="
+            flex gap-12
+            animate-[smoothMarquee_18s_linear_infinite]"  
+            >
+            {trust_logos.map((src, idx) => (
+            <img
+            key={idx}
+            src={src}
+            className="w-28 h-10 object-contain opacity-80 hover:opacity-100 transition"
+            />
+            ))}
             </div>
+
+            <div
+            className="
+            flex gap-10
+            animate-[smoothMarquee_18s_linear_infinite]"   
+            >
+            {trust_logos.map((src, idx) => (
+            <img
+            key={'clone-' + idx}
+            src={src}
+            className="w-28 h-10 object-contain opacity-80 hover:opacity-100 transition"
+            />
+            ))}
+            </div>
+            </div>
+            </div>
+
           </div>
         )}
       </div>
