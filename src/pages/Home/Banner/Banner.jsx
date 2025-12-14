@@ -61,11 +61,11 @@ const Banner = () => {
           >
             <motion.h1
               variants={itemUp}
-              className="text-4xl md:text-5xl font-extrabold leading-tight text-white"
+              className="text-4xl md:text-5xl font-extrabold leading-tight text-gray-800"
             >
-              Smart & Secure{" "}
-              <span className="text-[#2563eb]">Asset Management</span>{" "}
-              <span className="text-[#4FAE33]">for Modern Companies</span>
+              Smart & Secure{" "} <br />
+              <span className="text-primary">Asset Management</span>{" "}
+              <span> <br />for Modern Companies</span>
             </motion.h1>
 
             <motion.p
