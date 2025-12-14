@@ -29,7 +29,7 @@ const PackagesSection = () => {
   }
 
   return (
-    <section className="py-20 bg-base-100">
+    <section className="py-16 bg-base-100">
       <div className="max-w-7xl mx-auto px-6">
 
         <div className="text-center mb-14">
@@ -52,7 +52,7 @@ const PackagesSection = () => {
               className="
                 relative rounded-2xl border border-base-300 bg-blue-100 p-8
                 shadow-sm transition-all duration-200
-                hover:-translate-y-1 hover:shadow-lg
+                hover:-translate-y-1 hover:shadow-lg mb-5
               "
             >
               <h3 className="text-3xl font-bold text-center text-gray-900">

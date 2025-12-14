@@ -14,11 +14,11 @@ const Home = () => {
         <div>
             <Banner></Banner>
             <About></About>
-            <div className="w-full h-[px] bg-linear-to-r from-transparent via-gray-900 to-transparent my-1"></div>
+            <div className="w-full h-[px] bg-gray-900 my-1"></div>
             <PackagesSection></PackagesSection>
             <Feature></Feature>
             <Testimonials testimonialsPromise={testimonialsPromise}></Testimonials>
-            <div className="w-full h-[px] bg-linear-to-r from-transparent via-gray-900 to-transparent my-1"></div>
+            <div className="w-full h-[px] bg-gray-900 my-1"></div>
             <FAQ></FAQ>
             <ContactCTA></ContactCTA>
         </div>

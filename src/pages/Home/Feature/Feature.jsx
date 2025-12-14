@@ -63,7 +63,7 @@ const item = {
 
   const Feature = () => {
   return (
-    <section className="bg-blue-100 py-10">
+    <section className="bg-blue-100 py-12">
       <div className="max-w-7xl mx-auto px-6">
         
         <div className="text-center mx-auto mb-12">

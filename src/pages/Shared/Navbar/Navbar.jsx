@@ -8,10 +8,11 @@ import Logo from "../../../components/Logo/Logo";
 
   const NAV_LINKS = [
     { to: "/", label: "Home" },
+    { to: "/login", label: "Login" },
     { to: "/join-employee", label: "Join as Employee" },
-    { to: "/join-hr", label: "Join as HR Manager" },
+    { to: "/register", label: "Join as HR Manager" },
   ];
-  const hoverColorClass = "hover:text-[#4FAE33]";
+  const hoverColorClass = "hover:text-primary";
 
   return (
     <div className="w-full bg-base-200 shadow-lg">
