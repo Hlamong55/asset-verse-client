@@ -42,7 +42,7 @@ const Banner = () => {
 
       <svg
         aria-hidden
-        className="pointer-events-none absolute -right-28 -top-28 w-[520px] h-[400px] opacity-20"
+        className="pointer-events-none absolute -right-28 -top-28 w-130 h-100 opacity-20"
         viewBox="0 0 600 600"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +52,7 @@ const Banner = () => {
       </svg>
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-14 ">
-        <div className="min-h-[360px] flex items-center justify-center">
+        <div className="min-h-90 flex items-center justify-center">
           <motion.div
             className="w-full max-w-2xl text-center"
             variants={containerVariants}

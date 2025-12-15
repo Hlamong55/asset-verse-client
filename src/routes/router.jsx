@@ -3,7 +3,8 @@ import RootLayout from "../layouts/RootLayout";
 import Home from "../pages/Home/Home/Home";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Auth/Login/Login";
-import Register from "../pages/Auth/Register/Register";
+import HRRegister from "../pages/Auth/Register/HRRegister";
+import EmployeeRegister from "../pages/Auth/Register/EmployeeRegister";
 
 export const router = createBrowserRouter([
   {
@@ -25,8 +26,12 @@ export const router = createBrowserRouter([
             element: <Login></Login>
         },
         {
-            path: "register",
-            element: <Register></Register>
+            path: "hr-register",
+            element: <HRRegister></HRRegister>
+        },
+        {
+          path:"user-register",
+          element: <EmployeeRegister></EmployeeRegister>
         }
     ]
   }

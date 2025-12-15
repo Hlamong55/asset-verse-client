@@ -9,8 +9,8 @@ import Logo from "../../../components/Logo/Logo";
   const NAV_LINKS = [
     { to: "/", label: "Home" },
     { to: "/login", label: "Login" },
-    { to: "/join-employee", label: "Join as Employee" },
-    { to: "/register", label: "Join as HR Manager" },
+    { to: "/user-register", label: "Join as Employee" },
+    { to: "/hr-register", label: "Join as HR Manager" },
   ];
   const hoverColorClass = "hover:text-primary";
 
