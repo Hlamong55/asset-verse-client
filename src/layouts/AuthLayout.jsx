@@ -3,51 +3,39 @@ import { Outlet } from "react-router";
 
 const AuthLayout = () => {
   return (
-    <div className="max-w-7xl mx-auto flex bg-base-100">
+    <div className="min-h-screen flex">
 
-      {/* LEFT: Auth Form */}
-      <div className="w-full lg:w-1/2 flex flex-col">
-        {/* Logo */}
-        <div className="px-6 py-6">
+      <div className="w-full lg:w-[42%] flex flex-col px-10">
+        <div className="py-8">
           <Logo />
         </div>
 
-        {/* Form Area */}
-        <div className="flex flex-1 items-center justify-center px-6">
-          <div className="w-full max-w-md">
-            <Outlet />
-          </div>
+        <div className="flex flex-1 items-center">
+          <Outlet />
         </div>
       </div>
 
-      {/* RIGHT: Full Background Section */}
-      <div
-        className="hidden lg:flex w-1/2 relative bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://i.ibb.co.com/7xhP86FG/A-vibrant-dynamic-illustration-of-a-comprehensive-B2-B-lead-generation-funnel-showcasing-the-1024x585.webp')",
-        }}
-      >
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/40"></div>
+      <div className="hidden lg:flex w-[58%] bg-[#0f172a] text-white px-16">
+        <div className="flex flex-col justify-center max-w-lg">
+          <h2 className="text-4xl font-extrabold leading-tight">
+            Smarter Asset Management <br /> for Modern Enterprises
+          </h2>
 
-        {/* Text Content */}
-        <div className="relative z-10 flex items-center justify-center w-full px-12 text-white">
-          <div>
-            <h2 className="text-4xl font-extrabold leading-tight">
-              Smart Asset <br /> Management Starts Here
-            </h2>
+          <p className="mt-4 text-white/80">
+            Designed for HR teams to track, assign and manage assets with clarity and control.
+          </p>
 
-            <p className="mt-4 text-white/90 max-w-md">
-              AssetVerse helps HR teams track, assign, and manage company assets
-              with complete visibility and control.
-            </p>
-          </div>
+          <ul className="mt-6 space-y-3 text-white/90">
+            <li>✔ Centralized asset inventory</li>
+            <li>✔ Automated request & approval</li>
+            <li>✔ Scalable for growing companies</li>
+          </ul>
         </div>
       </div>
 
     </div>
   );
 };
+
 
 export default AuthLayout;
