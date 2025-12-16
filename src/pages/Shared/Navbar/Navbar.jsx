@@ -1,81 +1,154 @@
-import { useState } from "react";
-import { Link } from "react-router";
-import { FaCubes, FaBars, FaTimes } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { Link, NavLink } from "react-router";
+import { FaBars, FaTimes } from "react-icons/fa";
 import Logo from "../../../components/Logo/Logo";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
-  const Navbar = () => {
+const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [dbUser, setDbUser] = useState(null);
 
-  const NAV_LINKS = [
+  const { user, logOutUser } = useAuth();
+  const axiosSecure = useAxiosSecure();
+
+  useEffect(() => {
+    if (user?.email) {
+      axiosSecure.get(`/users/${user.email}`).then((res) => {
+        setDbUser(res.data);
+      });
+    }
+  }, [user, axiosSecure]);
+
+  const hoverClass = "hover:text-primary hover:underline";
+
+  const publicLinks = [
     { to: "/", label: "Home" },
     { to: "/login", label: "Login" },
     { to: "/user-register", label: "Join as Employee" },
     { to: "/hr-register", label: "Join as HR Manager" },
   ];
-  const hoverColorClass = "hover:text-primary";
+
+  const employeeLinks = [
+    { to: "/dashboard/employee", label: "My Assets" },
+    { to: "/dashboard/employee/team", label: "My Team" },
+    { to: "/dashboard/employee/request", label: "Request Asset" },
+    { to: "/dashboard/profile", label: "Profile" },
+  ];
+
+  const hrLinks = [
+    { to: "/dashboard/hr", label: "Asset List" },
+    { to: "/dashboard/hr/add-asset", label: "Add Asset" },
+    { to: "/dashboard/hr/requests", label: "All Requests" },
+    { to: "/dashboard/hr/employees", label: "Employee List" },
+    { to: "/dashboard/profile", label: "Profile" },
+  ];
+
+  const handleLogout = async () => {
+    await logOutUser();
+    localStorage.removeItem("access-token");
+    setOpen(false);
+  };
+
+  const renderLinks = (links) =>
+    links.map((l) => (
+      <li key={l.to}>
+        <NavLink
+          to={l.to}
+          onClick={() => setOpen(false)}
+          className={({ isActive }) =>
+            `block px-3 py-2 rounded-md transition ${
+              isActive ? "text-primary font-medium" : hoverClass
+            }`
+          }
+        >
+          {l.label}
+        </NavLink>
+      </li>
+    ));
 
   return (
-    <div className="w-full bg-base-200 shadow-lg">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+    <header className="w-full bg-base-200 shadow">
+      <nav className="max-w-7xl mx-auto px-4 lg:px-10">
         <div className="flex items-center justify-between h-16">
-          <Logo></Logo>
+          <div className="shrink-0">
+            <Logo />
+          </div>
 
-          <div className="hidden lg:flex lg:items-center lg:space-x-4">
-            <ul className="flex items-center gap-4 ">
-              {NAV_LINKS.map((l) => (
-                <li key={l.to}>
-                  <Link
-                    to={l.to}
-                    className={`px-2 py-1 rounded-md transition-colors duration-150 ${hoverColorClass} hover:underline`}
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <div className="hidden lg:flex items-center gap-4">
+            {!user && <ul className="flex gap-4">{renderLinks(publicLinks)}</ul>}
+
+            {user && dbUser && (
+              <div className="dropdown dropdown-end">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    <img
+                      src={
+                        user.companyLogo ||
+                        "https://i.ibb.co/9m9PpJk/avatar.png"
+                      }
+                      alt="avatar"
+                    />
+                  </div>
+                </label>
+
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                >
+                  {dbUser.role === "hr"
+                    ? renderLinks(hrLinks)
+                    : renderLinks(employeeLinks)}
+
+                  <li>
+                    <button onClick={handleLogout} className="text-error">
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
 
           {/* responsive */}
-          <div className="flex lg:hidden">
+          <div className="lg:hidden">
             <button
-              onClick={() => setOpen((s) => !s)}
-              aria-label={open ? "Close menu" : "Open menu"}
-              className="inline-flex npm install react-icons justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+              onClick={() => setOpen(!open)}
+              className="p-2 rounded-md focus:outline-none"
             >
-              {open ? (
-                <FaTimes className="h-4 w-4" />
-              ) : (
-                <FaBars className="h-4 w-4" />
-              )}
+              {open ? <FaTimes /> : <FaBars />}
             </button>
           </div>
         </div>
 
-        {/* Dropdown menu */}
         <div
-          className={`lg:hidden absolute left-50 right-0  transition-all duration-200 transform origin-top ${
-            open ? "scale-y-100 opacity-100" : "scale-y-0 opacity-0 pointer-events-none"
+          className={`lg:hidden transition-all duration-200 overflow-hidden ${
+            open ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
           }`}
-          
         >
-          <div className=" mx-2 bg-base-100 border border-base-300 rounded-md shadow-md overflow-hidden">
-            <ul className="flex flex-col">
-              {NAV_LINKS.map((l) => (
-                <li key={l.to} className="border-b border-base-200 last:border-b-0">
-                  <Link
-                    to={l.to}
-                    onClick={() => setOpen(false)}
-                    className={`block px-4 py-2 text-base ${hoverColorClass} transition-colors duration-150`}
+          <div className="bg-base-100 border border-base-300 rounded-lg mt-2 p-3">
+            {!user && <ul className="space-y-1">{renderLinks(publicLinks)}</ul>}
+
+            {user && dbUser && (
+              <ul className="space-y-1">
+                {dbUser.role === "hr"
+                  ? renderLinks(hrLinks)
+                  : renderLinks(employeeLinks)}
+
+                <li>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left px-3 py-2 text-error"
                   >
-                    {l.label}
-                  </Link>
+                    Logout
+                  </button>
                 </li>
-              ))}
-            </ul>
+              </ul>
+            )}
           </div>
         </div>
       </nav>
-    </div>
+    </header>
   );
 };
 

@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 
 const EmployeeRegister = () => {
@@ -27,9 +28,24 @@ const EmployeeRegister = () => {
       const res = await axiosSecure.post("/jwt", { email: data.email });
       localStorage.setItem("access-token", res.data.token);
 
+    Swal.fire({
+      icon: "success",
+      title: "Registration Successful 🎉",
+      text: "Your employee account has been created successfully.",
+      confirmButtonColor: "#2563eb",
+      timer: 2000,
+      showConfirmButton: false,
+    });
+
       navigate("/dashboard/employee");
     } catch (err) {
       console.error(err);
+
+    Swal.fire({
+      icon: "error",
+      title: "Registration Failed",
+      text: err.message || "Something went wrong. Please try again.",
+    });
     }
   };
 
