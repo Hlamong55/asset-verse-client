@@ -5,6 +5,10 @@ import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Auth/Login/Login";
 import HRRegister from "../pages/Auth/Register/HRRegister";
 import EmployeeRegister from "../pages/Auth/Register/EmployeeRegister";
+import DashboardLayout from "../layouts/DashboardLayout";
+import PrivateRoute from "./PrivateRouter";
+import HRDashboard from "../pages/Dashboard/HRDashboard/HRDashboard";
+import EmployeeDB from "../pages/Dashboard/EmployeeDashboard/EmployeeDB";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +37,23 @@ export const router = createBrowserRouter([
           path:"user-register",
           element: <EmployeeRegister></EmployeeRegister>
         }
+    ]
+  },
+  {
+    path: "dashboard",
+    element: <PrivateRoute>
+      <DashboardLayout></DashboardLayout>
+    </PrivateRoute>,
+
+    children: [
+      {
+        path: "hr",
+        element: <HRDashboard></HRDashboard>
+      },
+      {
+        path: "employee",
+        element: <EmployeeDB></EmployeeDB>
+      }
     ]
   }
 ]);
