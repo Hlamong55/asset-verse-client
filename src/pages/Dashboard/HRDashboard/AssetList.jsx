@@ -1,17 +1,20 @@
 import { useState } from "react";
+import { useSearchParams, Link } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import EditAsset from "./EditAsset";
-import { Link } from "react-router";
 
 const AssetList = () => {
   const axiosSecure = useAxiosSecure();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const pageFromURL = Number(searchParams.get("page")) || 1;
+  const limit = Number(searchParams.get("limit")) || 10;
+
+  const [page, setPage] = useState(pageFromURL);
   const [selectedAsset, setSelectedAsset] = useState(null);
-  const [page, setPage] = useState(1);
-  const limit = 10;
 
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["assets", page],
+    queryKey: ["assets", page, limit],
     queryFn: async () => {
       const res = await axiosSecure.get(
         `/assets?page=${page}&limit=${limit}`
@@ -24,15 +27,18 @@ const AssetList = () => {
   const assets = data?.assets || [];
   const totalPages = Math.ceil((data?.total || 0) / limit);
 
+  const updatePage = (newPage) => {
+    setPage(newPage);
+    setSearchParams({ page: newPage, limit });
+  };
+
   return (
-    <div className="space-y-6">
-      <h2 className="text-3xl font-bold text-center">Asset List</h2>
+    <div className="space-y-8">
+      <h2 className="text-4xl font-extrabold text-center">Asset List</h2>
 
       {!isLoading && assets.length === 0 && (
         <div className="min-h-[60vh] flex flex-col items-center justify-center text-center">
-          <h3 className="text-2xl font-semibold">
-            No assets found
-          </h3>
+          <h3 className="text-2xl font-semibold">No assets found</h3>
           <p className="text-gray-600 mt-2">
             Start managing your company assets by adding one.
           </p>
@@ -59,7 +65,6 @@ const AssetList = () => {
                   <th className="text-center">Action</th>
                 </tr>
               </thead>
-
               <tbody>
                 {assets.map((asset) => (
                   <tr key={asset._id}>
@@ -100,11 +105,19 @@ const AssetList = () => {
           </div>
 
           {/* pagination */}
-          <div className="flex justify-center gap-2 mt-4">
+          <div className="flex justify-center items-center gap-2 mt-6">
+            <button
+              className="btn btn-sm"
+              disabled={page === 1}
+              onClick={() => updatePage(page - 1)}
+            >
+              Previous
+            </button>
+
             {[...Array(totalPages).keys()].map((num) => (
               <button
                 key={num}
-                onClick={() => setPage(num + 1)}
+                onClick={() => updatePage(num + 1)}
                 className={`btn btn-sm ${
                   page === num + 1 ? "btn-primary" : "btn-outline"
                 }`}
@@ -112,6 +125,14 @@ const AssetList = () => {
                 {num + 1}
               </button>
             ))}
+
+            <button
+              className="btn btn-sm"
+              disabled={page === totalPages}
+              onClick={() => updatePage(page + 1)}
+            >
+              Next
+            </button>
           </div>
         </>
       )}
