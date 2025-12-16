@@ -37,11 +37,11 @@ const Navbar = () => {
   ];
 
   const hrLinks = [
-    { to: "/dashboard/hr", label: "Asset List" },
+    { to: "/dashboard/hr/asset-list", label: "Asset List" },
     { to: "/dashboard/hr/add-asset", label: "Add Asset" },
     { to: "/dashboard/hr/requests", label: "All Requests" },
-    { to: "/dashboard/hr/employees", label: "Employee List" },
-    { to: "/dashboard/profile", label: "Profile" },
+    { to: "/dashboard/hr/emply-list", label: "Employee List" },
+    { to: "/dashboard/hr/profile", label: "Profile" },
   ];
 
   const handleLogout = async () => {
