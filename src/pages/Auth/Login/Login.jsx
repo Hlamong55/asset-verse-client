@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 
 const Login = () => {
@@ -27,13 +28,29 @@ const Login = () => {
       const userRes = await axiosSecure.get(`/users/${data.email}`);
       const role = userRes.data.role;
 
+    Swal.fire({
+      icon: "success",
+      title: "Login Successful 🎉",
+      text: "Welcome back to AssetVerse!!",
+      timer: 1500,
+      showConfirmButton: false,
+    });
+
+    setTimeout(() => {
       if (role === "hr") {
-        navigate("/dashboard/hr");
+        navigate("/dashboard/hr/asset-list");
       } else {
-        navigate("/dashboard/employee");
+        navigate("/dashboard/employee/assets");
       }
+    }, 1500);
+
     } catch (err) {
       console.error(err);
+    Swal.fire({
+      icon: "error",
+      title: "Login Failed",
+      text: "Invalid email or password",
+    });
     }
   };
 

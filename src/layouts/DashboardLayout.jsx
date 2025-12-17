@@ -64,7 +64,7 @@ const DashboardLayout = () => {
     ));
 
   return (
-    <div className="min-h-screen flex bg-base-200">
+    <div className="min-h-screen flex bg-base-300">
       <aside className="hidden md:flex md:flex-col w-64 bg-base-100 border-r border-base-300">
         <div className="p-5 border-b">
           <Logo />

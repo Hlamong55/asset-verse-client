@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 
 const HRRegister = () => {
@@ -29,14 +30,28 @@ const HRRegister = () => {
       };
 
       await axiosSecure.post("/users", hrInfo);
-
       const res = await axiosSecure.post("/jwt", { email: data.email });
       localStorage.setItem("access-token", res.data.token);
 
-      navigate("/dashboard/hr");
-    } catch (err) {
-      console.error(err);
-    }
+      Swal.fire({
+            icon: "success",
+            title: "Registration Successful 🎉",
+            text: "Your company account has been created successfully.",
+            confirmButtonColor: "#2563eb",
+            timer: 2000,
+            showConfirmButton: false,
+          });
+      
+        navigate("/dashboard/hr/asset-list");
+        } catch (err) {
+          console.error(err);
+      
+      Swal.fire({
+            icon: "error",
+            title: "Registration Failed",
+            text: err.message || "Something went wrong. Please try again.",
+          });
+          }
   };
 
   return (
