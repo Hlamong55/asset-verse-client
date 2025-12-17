@@ -37,7 +37,7 @@ const EmployeeRegister = () => {
       showConfirmButton: false,
     });
 
-      navigate("/dashboard/employee");
+      navigate("/dashboard/employee/assets");
     } catch (err) {
       console.error(err);
 

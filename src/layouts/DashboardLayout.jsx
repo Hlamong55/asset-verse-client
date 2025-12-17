@@ -27,7 +27,7 @@ const DashboardLayout = () => {
   ];
 
   const employeeMenu = [
-    { to: "/dashboard/employee", label: "My Assets", icon: <FaBox /> },
+    { to: "/dashboard/employee/assets", label: "My Assets", icon: <FaBox /> },
     { to: "/dashboard/employee/team", label: "My Team", icon: <FaUsers /> },
     { to: "/dashboard/employee/request", label: "Request Asset", icon: <FaClipboardList /> },
     { to: "/dashboard/profile", label: "Profile", icon: <FaUserCircle /> },

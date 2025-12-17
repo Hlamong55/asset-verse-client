@@ -8,12 +8,16 @@ import EmployeeRegister from "../pages/Auth/Register/EmployeeRegister";
 import DashboardLayout from "../layouts/DashboardLayout";
 import PrivateRoute from "./PrivateRouter";
 import HRDashboard from "../pages/Dashboard/HRDashboard/AssetList";
-import EmployeeDB from "../pages/Dashboard/EmployeeDashboard/EmployeeDB";
+import EmployeeDB from "../pages/Dashboard/EmployeeDashboard/MyAssets";
 import AssetList from "../pages/Dashboard/HRDashboard/AssetList";
 import AddAsset from "../pages/Dashboard/HRDashboard/AddAsset";
 import AllRequest from "../pages/Dashboard/HRDashboard/AllRequest";
 import EmployeeList from "../pages/Dashboard/HRDashboard/EmployeeList";
 import HRProfile from "../pages/Dashboard/HRDashboard/HRProfile";
+import MyAssets from "../pages/Dashboard/EmployeeDashboard/MyAssets";
+import RequestAsset from "../pages/Dashboard/EmployeeDashboard/RequestAsset";
+import MyTeam from "../pages/Dashboard/EmployeeDashboard/MyTeam";
+import EmployeeProfile from "../pages/Dashboard/EmployeeDashboard/EmployeeProfile";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +55,8 @@ export const router = createBrowserRouter([
     </PrivateRoute>,
 
     children: [
+
+      // hr dashboard
       {
         path: "hr/asset-list",
         element: <AssetList></AssetList>
@@ -73,9 +79,22 @@ export const router = createBrowserRouter([
       },
 
 
+      // employee dashboard
       {
-        path: "employee",
-        element: <EmployeeDB></EmployeeDB>
+        path: "employee/assets",
+        element: <MyAssets></MyAssets>
+      },
+      {
+        path: "employee/request",
+        element: <RequestAsset></RequestAsset>
+      },
+      {
+        path: "employee/team",
+        element: <MyTeam></MyTeam>
+      },
+      {
+        path: "employee/profile",
+        element: <EmployeeProfile></EmployeeProfile>
       }
     ]
   }

@@ -32,9 +32,16 @@ const AssetList = () => {
     setSearchParams({ page: newPage, limit });
   };
 
+
+  
   return (
     <div className="space-y-8">
-      <h2 className="text-4xl font-extrabold text-center">Asset List</h2>
+      <div>
+        <h2 className="text-4xl font-extrabold text-center">Asset List</h2>
+      <p className="text-gray-600 mt-3 max-w-2xl mx-auto text-center">
+      View and manage all company assets from a centralized inventory.
+      </p>
+      </div>
 
       {!isLoading && assets.length === 0 && (
         <div className="min-h-[60vh] flex flex-col items-center justify-center text-center">
@@ -71,10 +78,10 @@ const AssetList = () => {
                     <td>
                       <img
                         src={asset.productImage}
-                        className="w-12 h-12 rounded object-cover"
+                        className="w-20 h-14 rounded object-cover"
                       />
                     </td>
-                    <td>{asset.productName}</td>
+                    <td className="text-base font-medium">{asset.productName}</td>
                     <td>
                       <span
                         className={`badge ${
@@ -86,8 +93,8 @@ const AssetList = () => {
                         {asset.productType}
                       </span>
                     </td>
-                    <td>{asset.productQuantity}</td>
-                    <td>
+                    <td className="font-semibold">{asset.productQuantity}</td>
+                    <td className="font-semibold">
                       {new Date(asset.dateAdded).toLocaleDateString()}
                     </td>
                     <td className="text-center">
