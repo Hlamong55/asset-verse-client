@@ -35,9 +35,9 @@ const AssetList = () => {
 
   
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 bg-base-100 rounded-xl p-5 shadow-sm">
       <div>
-        <h2 className="text-4xl font-extrabold text-center">Asset List</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-center">Asset List</h2>
       <p className="text-gray-600 mt-3 max-w-2xl mx-auto text-center">
       View and manage all company assets from a centralized inventory.
       </p>
