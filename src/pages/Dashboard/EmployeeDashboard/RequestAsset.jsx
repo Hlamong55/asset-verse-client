@@ -56,7 +56,7 @@ const RequestAsset = () => {
   return (
     <div>
       <div className="mb-8 text-center">
-        <h2 className="text-3xl font-extrabold">Request an Asset</h2>
+        <h2 className="text-4xl font-extrabold">Request an Asset</h2>
         <p className="text-gray-600 mt-2">
           Browse available company assets and submit a request
         </p>
@@ -83,8 +83,7 @@ const RequestAsset = () => {
               <img
                 src={asset.productImage}
                 alt={asset.productName}
-                className="w-full h-full object-cover
-                           group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
             </div>
 

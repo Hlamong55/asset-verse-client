@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router";
 import {
@@ -12,6 +13,8 @@ import {
 } from "react-icons/fa";
 import Logo from "../components/Logo/Logo";
 import useAuth from "../hooks/useAuth";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+
 
 
 const DashboardLayout = () => {
@@ -19,7 +22,20 @@ const DashboardLayout = () => {
   const { user, logOutUser } = useAuth();
   const navigate = useNavigate();
 
-  const isHR = user?.role === "hr";
+
+  const { data: dbUser = {} } = useQuery({
+  queryKey: ["dbUser", user?.email],
+  enabled: !!user?.email,
+  queryFn: async () => {
+    const res = await useAxiosSecure.get(`/users/${user.email}`);
+    return res.data;
+  },
+});
+
+
+
+  const isHR = dbUser?.role === "hr";
+
 
   const hrMenu = [
     { to: "/dashboard/hr/asset-list", label: "Asset List", icon: <FaBox /> },

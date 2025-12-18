@@ -42,6 +42,43 @@ const EmployeeProfile = () => {
     },
   });
 
+
+  const uploadImageToImgBB = async (file) => {
+  const formData = new FormData();
+  formData.append("image", file);
+
+  const res = await fetch(
+    `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_KEY}`,
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
+
+  const data = await res.json();
+  return data.data.display_url;
+};
+
+const handlePhotoChange = async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  try {
+    const imageUrl = await uploadImageToImgBB(file);
+
+    await axiosSecure.patch(`/users/${user.email}`, {
+      profileImage: imageUrl,
+    });
+
+    Swal.fire("Updated", "Profile photo updated", "success");
+    refetch();
+  } catch {
+    Swal.fire("Error", "Photo upload failed", "error");
+  }
+};
+
+
+
   const onSubmit = async (data) => {
     try {
       await axiosSecure.patch(`/users/${user.email}`, data);
@@ -59,15 +96,21 @@ const EmployeeProfile = () => {
           <img
             src={
               profile.profileImage ||
-              "https://i.ibb.co/7N1h0kD/avatar.png"
+              "https://i.ibb.co.com/W4rvDRZd/istockphoto-1033886776-612x612.jpg"
             }
-            alt="avatar"
-            className="w-28 h-28 rounded-full object-cover border"
+            alt="Upload Your Photo"
+            className="w-28 h-28 rounded-full object-cover border border-green-600"
           />
-          <label className="absolute -bottom-1 -right-1 bg-primary text-white text-xs px-2 py-1 rounded-lg cursor-pointer">
+        <label className="absolute -bottom-1.5 -right-1 bg-primary text-white text-xs px-2 py-1 rounded-lg cursor-pointer transition-transform duration-300 hover:scale-105 hover:bg-green-600">
             Change
-            <input type="file" hidden />
-          </label>
+            <input
+            type="file"
+            hidden
+            accept="image/*"
+            onChange={handlePhotoChange}
+            />
+        </label>
+
         </div>
 
         <div>
@@ -91,7 +134,7 @@ const EmployeeProfile = () => {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="grid sm:grid-cols-2 gap-4"
+          className="grid sm:grid-cols-2 gap-3"
         >
           <div>
             <label className="label-text">Full Name</label>
@@ -120,7 +163,7 @@ const EmployeeProfile = () => {
           </div>
 
           <div className="flex items-end">
-            <button className="btn btn-primary w-full">
+            <button className="btn btn-primary w-full transition-transform duration-300 hover:scale-105">
               Save Changes
             </button>
           </div>
