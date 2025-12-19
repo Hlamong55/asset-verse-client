@@ -52,6 +52,10 @@ const AssetList = () => {
   };
 
 
+  if (isLoading) {
+    return <div className="text-center py-40">Loading...</div>;
+  }
+
 
 
   return (
