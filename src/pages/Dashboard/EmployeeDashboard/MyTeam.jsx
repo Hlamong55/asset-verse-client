@@ -32,7 +32,7 @@ const MyTeam = () => {
   });
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6">
+    <div className=" mx-auto bg-base-100 rounded-xl p-6 shadow space-y-6">
       <div className="text-center">
         <h2 className="text-3xl font-extrabold flex justify-center items-center gap-2">
           <FaUsers /> My Team
@@ -43,7 +43,7 @@ const MyTeam = () => {
       </div>
 
       {affiliations.length === 0 && (
-        <div className="bg-base-100 rounded-xl mt-10 p-10 text-center shadow-sm">
+        <div className="  mt-20 p-10 text-center">
           <p className="text-lg font-semibold">
             You are not affiliated with any company yet
           </p>

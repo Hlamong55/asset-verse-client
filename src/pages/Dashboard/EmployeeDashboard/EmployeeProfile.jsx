@@ -190,18 +190,18 @@ const handlePhotoChange = async (e) => {
             {affiliations.map((a) => (
               <div
                 key={a._id}
-                className="border rounded-xl p-4 flex gap-4 items-center"
+                className="border rounded-xl px-4 py-2 flex gap-6 items-center"
               >
                 <img
                   src={a.companyLogo}
                   alt=""
-                  className="w-12 h-12 object-contain"
+                  className="w-20 h-16"
                 />
                 <div>
                   <h4 className="font-semibold">
                     {a.companyName}
                   </h4>
-                  <p className="text-sm text-gray-500 flex items-center gap-1">
+                  <p className="text-sm text-gray-500 flex items-center gap-1 mt-1.5">
                     <FaCalendarAlt />
                     Joined {new Date(a.affiliationDate).toLocaleDateString()}
                   </p>
