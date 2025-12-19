@@ -21,13 +21,14 @@ const DashboardLayout = () => {
   const [open, setOpen] = useState(false);
   const { user, logOutUser } = useAuth();
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
 
   const { data: dbUser = {} } = useQuery({
   queryKey: ["dbUser", user?.email],
   enabled: !!user?.email,
   queryFn: async () => {
-    const res = await useAxiosSecure.get(`/users/${user.email}`);
+    const res = await axiosSecure.get(`/users/${user.email}`);
     return res.data;
   },
 });
@@ -81,16 +82,16 @@ const DashboardLayout = () => {
 
   return (
     <div className="min-h-screen flex bg-base-300">
-      <aside className="hidden md:flex md:flex-col w-64 bg-base-100 border-r border-base-300">
+      <aside className="hidden md:flex md:flex-col  w-64 bg-base-100 border-r border-base-300 sticky top-0 h-screen">
         <div className="p-5 border-b">
           <Logo />
         </div>
 
-        <ul className="menu px-4 py-4 space-y-1">
+        <ul className="menu w-full px-4 py-4 space-y-1">
           {renderMenu()}
         </ul>
 
-        <div className="p-4 border-t">
+        <div className="p-4 mt-96 ">
           <button
             onClick={handleLogout}
             className="btn bg-red-500 text-white flex items-center gap-2 w-full px-3 py-2 rounded-md hover:bg-red-700 transition-transform duration-300 hover:scale-105"
@@ -135,7 +136,7 @@ const DashboardLayout = () => {
           <span className="font-bold">Dashboard</span>
         </div>
 
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-6 overflow-y-auto">
           <Outlet />
         </main>
       </div>

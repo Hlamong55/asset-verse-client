@@ -63,7 +63,7 @@ const RequestAsset = () => {
       </div>
 
       {/* card */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
         {assets.length === 0 && (
           <div className="col-span-full h-60 flex flex-col items-center justify-center text-gray-500">
             <p className="text-lg font-medium">No assets available</p>
@@ -97,9 +97,15 @@ const RequestAsset = () => {
               </p>
 
               <div className="flex items-center justify-between text-sm my-2">
-                <span className="badge badge-soft badge-primary">
+                <span
+                  className={`badge badge-soft ${asset.productType === "Returnable"
+                  ? "badge-primary"
+                  : "badge-warning"
+                }`}
+                >
                   {asset.productType}
                 </span>
+
 
                 <span className="font-semibold text-gray-700">
                   Available:{" "}

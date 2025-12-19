@@ -68,7 +68,7 @@ const AddAsset = () => {
             {...register("productName", {
               required: "Asset name is required",
             })}
-            className="input text-gray-700 input-bordered w-full"
+            className="input py-6 text-gray-700 input-bordered w-full"
             placeholder="e.g. MacBook Pro"
           />
           {errors.productName && (
@@ -86,7 +86,7 @@ const AddAsset = () => {
             {...register("productImage", {
               required: "Image URL is required",
             })}
-            className="input input-bordered text-gray-700 w-full"
+            className="input py-6 input-bordered text-gray-700 w-full"
             placeholder="ImgBB / Cloudinary image link"
           />
           {errors.productImage && (
@@ -103,7 +103,7 @@ const AddAsset = () => {
             </label>
             <select
               {...register("productType", { required: true })}
-              className="select select-bordered text-gray-700 w-full"
+              className="select select-bordered text-gray-700  w-full"
             >
               <option value="">Select asset type</option>
               <option value="Returnable">Returnable</option>

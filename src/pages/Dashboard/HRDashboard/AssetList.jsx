@@ -3,12 +3,13 @@ import { useSearchParams, Link } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import EditAsset from "./EditAsset";
+import Swal from "sweetalert2";
 
 const AssetList = () => {
   const axiosSecure = useAxiosSecure();
   const [searchParams, setSearchParams] = useSearchParams();
   const pageFromURL = Number(searchParams.get("page")) || 1;
-  const limit = Number(searchParams.get("limit")) || 10;
+  const limit = Number(searchParams.get("limit")) || 8;
 
   const [page, setPage] = useState(pageFromURL);
   const [selectedAsset, setSelectedAsset] = useState(null);
@@ -16,9 +17,7 @@ const AssetList = () => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["assets", page, limit],
     queryFn: async () => {
-      const res = await axiosSecure.get(
-        `/assets?page=${page}&limit=${limit}`
-      );
+      const res = await axiosSecure.get(`/assets?page=${page}&limit=${limit}`);
       return res.data;
     },
     keepPreviousData: true,
@@ -33,14 +32,37 @@ const AssetList = () => {
   };
 
 
-  
+
+
+  const handleDelete = async (id) => {
+  const res = await Swal.fire({
+    title: "Are you sure?",
+    text: "This asset will be permanently deleted",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  });
+
+  if (res.isConfirmed) {
+    await axiosSecure.delete(`/assets/${id}`);
+    Swal.fire("Deleted!", "Asset has been deleted.", "success");
+    refetch();
+  }
+  };
+
+
+
+
   return (
     <div className="space-y-8 bg-base-100 rounded-xl p-5 shadow-sm">
       <div>
-        <h2 className="text-3xl md:text-4xl font-extrabold text-center">Asset List</h2>
-      <p className="text-gray-600 mt-3 max-w-2xl mx-auto text-center">
-      View and manage all company assets from a centralized inventory.
-      </p>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-center">
+          Asset List
+        </h2>
+        <p className="text-gray-600 mt-3 max-w-2xl mx-auto text-center">
+          View and manage all company assets from a centralized inventory.
+        </p>
       </div>
 
       {!isLoading && assets.length === 0 && (
@@ -49,10 +71,7 @@ const AssetList = () => {
           <p className="text-gray-600 mt-2">
             Start managing your company assets by adding one.
           </p>
-          <Link
-            to="/dashboard/hr/add-asset"
-            className="btn btn-primary mt-4"
-          >
+          <Link to="/dashboard/hr/add-asset" className="btn btn-primary mt-4">
             Add First Asset
           </Link>
         </div>
@@ -81,7 +100,9 @@ const AssetList = () => {
                         className="w-20 h-14 rounded object-cover"
                       />
                     </td>
-                    <td className="text-base font-medium">{asset.productName}</td>
+                    <td className="text-base font-medium">
+                      {asset.productName}
+                    </td>
                     <td>
                       <span
                         className={`badge ${
@@ -97,12 +118,19 @@ const AssetList = () => {
                     <td className="font-semibold">
                       {new Date(asset.dateAdded).toLocaleDateString()}
                     </td>
-                    <td className="text-center">
+                    <td className="flex gap-2 justify-center">
                       <button
-                        className="btn btn-sm btn-outline"
+                        className="btn btn-sm btn-outline btn-success transition-transform duration-300 hover:scale-105"
                         onClick={() => setSelectedAsset(asset)}
                       >
                         Edit
+                      </button>
+
+                      <button
+                        className="btn btn-sm bg-red-600 text-white hover:bg-red-700 transition-transform duration-300 hover:scale-105"
+                        onClick={() => handleDelete(asset._id)}
+                      >
+                        Delete
                       </button>
                     </td>
                   </tr>
