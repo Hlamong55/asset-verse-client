@@ -58,8 +58,8 @@ const AllRequest = () => {
 
   return (
     <div className="bg-base-100 p-6 rounded-xl shadow">
-      <h2 className="text-3xl font-bold text-center">All Requests</h2>
-      <p className="text-center text-gray-500 mt-2">
+      <h2 className="text-4xl font-bold text-center">All Requests</h2>
+      <p className="text-center text-gray-600 mt-2">
         Manage employee asset requests
       </p>
 
