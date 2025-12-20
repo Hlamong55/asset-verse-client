@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
 
 const EmployeeList = () => {
   const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
 
   const { data: employees = [], refetch, isLoading } = useQuery({
     queryKey: ["employees"],
@@ -12,6 +14,15 @@ const EmployeeList = () => {
       return res.data;
     },
   });
+
+  const { data: hr = {} } = useQuery({
+  queryKey: ["hr-info"],
+  queryFn: async () => {
+    const res = await axiosSecure.get(`/users/${user.email}`);
+    return res.data;
+  },
+  });
+
 
   const handleRemove = async (id) => {
     const confirm = await Swal.fire({
@@ -44,9 +55,14 @@ const EmployeeList = () => {
         Manage employees affiliated with your company
       </p>
 
-      <p className="text-center text-xl mt-5 font-bold">
-        {employees.length} employees affiliated
-      </p>
+      <p className={`text-center text-xl mt-5 font-bold ${ hr.currentEmployees >= hr.packageLimit
+      ? "text-error"
+      : "text-primary"
+      }`}
+>
+  {hr.currentEmployees}/{hr.packageLimit} employees used
+</p>
+
 
       {employees.length === 0 && (
         <div className="text-center py-20 text-gray-500">

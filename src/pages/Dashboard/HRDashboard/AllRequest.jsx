@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
 
 const AllRequest = () => {
   const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
 
   const { data: requests = [], refetch, isLoading } = useQuery({
     queryKey: ["all-requests"],
@@ -13,7 +15,28 @@ const AllRequest = () => {
     },
   });
 
+
+  const { data: hr = {} } = useQuery({
+  queryKey: ["hr-info"],
+  queryFn: async () => {
+    const res = await axiosSecure.get(`/users/${user.email}`);
+    return res.data;
+  },
+  });
+
+
   const handleApprove = async (id) => {
+
+    if (hr.currentEmployees >= hr.packageLimit) {
+      Swal.fire({
+      icon: "error",
+      title: "Employee Limit Reached",
+      text: `Your current plan allows only ${hr.packageLimit} employees. Please upgrade your plan to add more.`,
+      confirmButtonText: "Upgrade Plan",
+    });
+    return;
+    }
+
     const confirm = await Swal.fire({
       title: "Approve Request?",
       text: "Asset will be assigned to employee",

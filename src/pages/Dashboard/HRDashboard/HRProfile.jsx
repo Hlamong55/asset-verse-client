@@ -68,18 +68,33 @@ const HRProfile = () => {
 
   return (
     <div className="max-w-7xl mx-auto space-y-8">
-      <div className="bg-base-100 px-8 py-4 rounded-xl shadow flex items-center gap-7">
+      <div className="bg-base-100 px-6 py-4 rounded-xl shadow flex flex-col md:flex-row md:items-center gap-6 justify-between">
+
+        <div className="flex items-center gap-6">
         <img
-          src={profile.companyLogo}
-          alt=""
-          className="w-36 h-24 rounded-xl object-contain border border-primary"
+        src={profile.companyLogo}
+        alt=""
+        className="w-36 h-24 rounded-xl object-contain border border-primary bg-base-200"
         />
+
         <div>
-          <h2 className="text-2xl font-bold">{profile.companyName}</h2>
-          <p className="text-gray-600">{profile.email}</p>
-          <span className="badge badge-primary mt-2">HR Manager</span>
+        <h2 className="text-2xl font-bold">{profile.companyName}</h2>
+        <p className="text-gray-600 text-sm">{profile.email}</p>
+        <span className="badge badge-primary mt-2">HR Manager</span>
         </div>
+        </div>
+
+      <div className="flex flex-row md:flex-col items-start md:items-end gap-3">
+      <span className="badge badge-outline badge-primary font-semibold px-4 py-3.5">
+      Plan: {profile.subscription || "Basic"}
+      </span>
+
+      <p className=" font-semibold text-gray-600">
+      {profile.currentEmployees}/{profile.packageLimit} employees used
+      </p>
       </div>
+      </div>
+
 
       {/* info */}
       <div className="bg-base-100 p-6 rounded-xl shadow">
