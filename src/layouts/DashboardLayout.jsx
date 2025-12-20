@@ -10,6 +10,7 @@ import {
   FaBars,
   FaTimes,
   FaSignOutAlt,
+  FaCrown,
 } from "react-icons/fa";
 import Logo from "../components/Logo/Logo";
 import useAuth from "../hooks/useAuth";
@@ -44,6 +45,8 @@ const DashboardLayout = () => {
     { to: "/dashboard/hr/requests", label: "All Requests", icon: <FaClipboardList /> },
     { to: "/dashboard/hr/emply-list", label: "Employee List", icon: <FaUsers /> },
     { to: "/dashboard/hr/profile", label: "Profile", icon: <FaUserCircle /> },
+    { to: "/dashboard/hr/packages", label: "Upgrade Package", icon: <FaCrown />
+},
   ];
 
   const employeeMenu = [
@@ -91,7 +94,7 @@ const DashboardLayout = () => {
           {renderMenu()}
         </ul>
 
-        <div className="p-4 mt-96 ">
+        <div className="p-4 mt-92 ">
           <button
             onClick={handleLogout}
             className="btn bg-red-500 text-white flex items-center gap-2 w-full px-3 py-2 rounded-md hover:bg-red-700 transition-transform duration-300 hover:scale-105"
@@ -102,7 +105,7 @@ const DashboardLayout = () => {
         </div>
       </aside>
 
-      {/* mobile Responsive */}
+      {/* Responsive */}
       {open && (
         <div className="fixed inset-0 z-50 md:hidden bg-black/40">
           <aside className="w-64 h-full bg-base-100">

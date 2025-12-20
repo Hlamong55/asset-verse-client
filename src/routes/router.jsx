@@ -18,6 +18,7 @@ import MyAssets from "../pages/Dashboard/EmployeeDashboard/MyAssets";
 import RequestAsset from "../pages/Dashboard/EmployeeDashboard/RequestAsset";
 import MyTeam from "../pages/Dashboard/EmployeeDashboard/MyTeam";
 import EmployeeProfile from "../pages/Dashboard/EmployeeDashboard/EmployeeProfile";
+import UpgradePackage from "../pages/Dashboard/HRDashboard/UpgradePackage";
 
 export const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ export const router = createBrowserRouter([
       {
         path: "hr/profile",
         element: <HRProfile></HRProfile>
+      },
+      {
+        path: "hr/packages",
+        element: <UpgradePackage></UpgradePackage>
       },
 
 
