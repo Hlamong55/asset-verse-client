@@ -57,7 +57,7 @@ const MyAssets = () => {
 
       <div className="relative flex-1 max-w-md">
       <input
-        className="input input-bordered w-full pl-5"
+        className="input border-2 border-primary w-full pl-5"
         placeholder="Search asset......"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
@@ -66,7 +66,7 @@ const MyAssets = () => {
 
   
     <select
-      className="select select-bordered w-44"
+      className="select select-bordered border-2 border-primary w-44"
       value={filter}
       onChange={(e) => setFilter(e.target.value)}
     >
@@ -78,7 +78,7 @@ const MyAssets = () => {
     {/* Print */}
     <button
       onClick={() => window.print()}
-      className="btn btn-outline btn-sm ml-auto"
+      className="btn  btn-primary btn-sm ml-auto transition-transform duration-200 hover:scale-105"
     >
       🖨 Print
     </button>
@@ -127,7 +127,7 @@ const MyAssets = () => {
       </div>
 
       ) : (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto mt-14">
           <table className="table table-zebra">
             <thead>
               <tr>
@@ -165,7 +165,7 @@ const MyAssets = () => {
                       a.assetType === "Returnable" && (
                         <button
                           onClick={() => handleReturn(a._id)}
-                          className="btn btn-sm btn-outline btn-warning"
+                          className="btn btn-sm btn-warning transition-transform duration-200 hover:scale-105"
                         >
                           Return
                         </button>

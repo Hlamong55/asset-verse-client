@@ -1,109 +1,115 @@
-import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { FaUsers } from "react-icons/fa";
+import { FaBirthdayCake, FaUsers } from "react-icons/fa";
 
 const MyTeam = () => {
-  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const [selectedCompany, setSelectedCompany] = useState("");
 
-  const { data: affiliations = [] } = useQuery({
-    queryKey: ["my-affiliations", user?.email],
-    enabled: !!user?.email,
+  const { data = {}, isLoading } = useQuery({
+    queryKey: ["my-team"],
     queryFn: async () => {
-      const res = await axiosSecure.get(
-        `/employee-affiliations/${user.email}`
-      );
+      const res = await axiosSecure.get("/employee/my-team");
       return res.data;
     },
   });
 
-  const { data: team = [], isLoading } = useQuery({
-    queryKey: ["my-team", selectedCompany],
-    enabled: !!selectedCompany,
-    queryFn: async () => {
-      const res = await axiosSecure.get(
-        `/my-team?companyName=${selectedCompany}`
-      );
-      return res.data;
-    },
-  });
+  const { companies = [], team = [], birthdays = [] } = data;
+
+  if (isLoading) {
+    return <div className="text-center py-40">Loading...</div>;
+  }
 
   return (
-    <div className=" mx-auto bg-base-100 rounded-xl p-6 shadow space-y-6">
+    <div className="space-y-8">
       <div className="text-center">
-        <h2 className="text-3xl font-extrabold flex justify-center items-center gap-2">
+        <h2 className="text-4xl font-extrabold flex items-center justify-center gap-2">
           <FaUsers /> My Team
         </h2>
-        <p className="text-gray-600 mt-1">
-          View colleagues from your affiliated company
+        <p className="text-gray-600 mt-2">
+          Colleagues from your affiliated companies
         </p>
       </div>
 
-      {affiliations.length === 0 && (
-        <div className="  mt-20 p-10 text-center">
-          <p className="text-lg font-semibold">
-            You are not affiliated with any company yet
-          </p>
-          <p className="text-gray-500 mt-1">
-            Request an asset to join a company
-          </p>
+
+      <div className="flex justify-center">
+        <select className="select select-bordered max-w-xs">
+          {companies.map((c) => (
+            <option key={c._id}>{c.companyName}</option>
+          ))}
+        </select>
+      </div>
+
+      {/* team cards */}
+      {team.length === 0 ? (
+        <div className="h-72 flex flex-col items-center justify-center text-gray-500">
+          <p className="text-lg font-medium">No team members found</p>
         </div>
-      )}
-
-
-      {affiliations.length > 0 && (
-        <div className="max-w-sm mx-auto">
-          <select
-            className="select select-bordered w-full"
-            value={selectedCompany}
-            onChange={(e) => setSelectedCompany(e.target.value)}
-          >
-            <option value="">Select Company</option>
-            {affiliations.map((a) => (
-              <option key={a._id} value={a.companyName}>
-                {a.companyName}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
-
-
-      {selectedCompany && (
+      ) : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {isLoading
-            ? Array.from({ length: 6 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="h-32 bg-base-200 rounded-xl animate-pulse"
-                />
-              ))
-            : team.map((member) => (
-                <div
-                  key={member._id}
-                  className="bg-base-100 p-5 rounded-xl shadow-sm flex items-center gap-4"
-                >
-                  <img
-                    src={
-                      member.profileImage ||
-                      "https://i.ibb.co.com/W4rvDRZd/istockphoto-1033886776-612x612.jpg"
-                    }
-                    alt=""
-                    className="w-14 h-14 rounded-full object-cover"
-                  />
-                  <div>
-                    <h4 className="font-semibold">{member.name}</h4>
-                    <p className="text-sm text-gray-500">
-                      {member.email}
-                    </p>
-                  </div>
-                </div>
-              ))}
+          {team.map((member) => (
+            <div
+              key={member._id}
+              className="bg-base-100 rounded-xl shadow hover:shadow-lg transition p-6 flex items-center gap-4"
+            >
+              <img
+                src={
+                  member.profileImage ||
+                  "https://i.ibb.co/0Jmshvb/avatar.png"
+                }
+                alt=""
+                className="w-14 h-14 rounded-full object-cover border"
+              />
+
+              <div>
+                <h4 className="font-semibold text-lg">{member.name}</h4>
+                <p className="text-sm text-gray-500">{member.email}</p>
+                <span className="badge badge-outline badge-primary mt-2">
+                  {member.role === "hr" ? "HR Manager" : "Employee"}
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
       )}
+
+      {/* birthdays */}
+      <div className="bg-base-100 rounded-xl p-6 shadow">
+        <h3 className="text-2xl font-bold flex items-center gap-2 mb-4">
+          <FaBirthdayCake className="text-pink-500" />
+          Upcoming Birthdays
+        </h3>
+
+        {birthdays.length === 0 ? (
+          <p className="text-gray-500">
+            No birthdays this month 🎉
+          </p>
+        ) : (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {birthdays.map((b) => (
+              <div
+                key={b._id}
+                className="border rounded-lg p-4 flex items-center gap-3"
+              >
+                <img
+                  src={
+                    b.profileImage ||
+                    "https://i.ibb.co/0Jmshvb/avatar.png"
+                  }
+                  alt=""
+                  className="w-10 h-10 rounded-full object-cover"
+                />
+
+                <div>
+                  <p className="font-medium">{b.name}</p>
+                  <p className="text-sm text-gray-500">
+                    🎂 {new Date(b.dateOfBirth).toDateString()}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
