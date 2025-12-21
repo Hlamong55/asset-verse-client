@@ -11,6 +11,7 @@ import {
   FaTimes,
   FaSignOutAlt,
   FaCrown,
+  FaMoneyBillWave,
 } from "react-icons/fa";
 import Logo from "../components/Logo/Logo";
 import useAuth from "../hooks/useAuth";
@@ -45,8 +46,9 @@ const DashboardLayout = () => {
     { to: "/dashboard/hr/requests", label: "All Requests", icon: <FaClipboardList /> },
     { to: "/dashboard/hr/emply-list", label: "Employee List", icon: <FaUsers /> },
     { to: "/dashboard/hr/profile", label: "Profile", icon: <FaUserCircle /> },
-    { to: "/dashboard/hr/packages", label: "Upgrade Package", icon: <FaCrown />
-},
+    { to: "/dashboard/hr/upgrade-package", label: "Upgrade Package", icon: <FaCrown />},
+    { to: "/dashboard/hr/payment-history", label: "Payment History", icon: <FaMoneyBillWave />}
+
   ];
 
   const employeeMenu = [
@@ -94,7 +96,7 @@ const DashboardLayout = () => {
           {renderMenu()}
         </ul>
 
-        <div className="p-4 mt-92 ">
+        <div className="p-4 mt-80 ">
           <button
             onClick={handleLogout}
             className="btn bg-red-500 text-white flex items-center gap-2 w-full px-3 py-2 rounded-md hover:bg-red-700 transition-transform duration-300 hover:scale-105"

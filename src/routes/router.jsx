@@ -7,8 +7,6 @@ import HRRegister from "../pages/Auth/Register/HRRegister";
 import EmployeeRegister from "../pages/Auth/Register/EmployeeRegister";
 import DashboardLayout from "../layouts/DashboardLayout";
 import PrivateRoute from "./PrivateRouter";
-import HRDashboard from "../pages/Dashboard/HRDashboard/AssetList";
-import EmployeeDB from "../pages/Dashboard/EmployeeDashboard/MyAssets";
 import AssetList from "../pages/Dashboard/HRDashboard/AssetList";
 import AddAsset from "../pages/Dashboard/HRDashboard/AddAsset";
 import AllRequest from "../pages/Dashboard/HRDashboard/AllRequest";
@@ -19,6 +17,9 @@ import RequestAsset from "../pages/Dashboard/EmployeeDashboard/RequestAsset";
 import MyTeam from "../pages/Dashboard/EmployeeDashboard/MyTeam";
 import EmployeeProfile from "../pages/Dashboard/EmployeeDashboard/EmployeeProfile";
 import UpgradePackage from "../pages/Dashboard/HRDashboard/UpgradePackage";
+import PaymentSuccess from "../pages/Dashboard/HRDashboard/Payment/PaymentSuccess";
+import PaymentHistory from "../pages/Dashboard/HRDashboard/Payment/PaymentHistory";
+
 
 export const router = createBrowserRouter([
   {
@@ -79,8 +80,16 @@ export const router = createBrowserRouter([
         element: <HRProfile></HRProfile>
       },
       {
-        path: "hr/packages",
+        path: "hr/upgrade-package",
         element: <UpgradePackage></UpgradePackage>
+      },
+      {
+        path: "hr/payment-success",
+        element: <PaymentSuccess></PaymentSuccess>
+      },
+      {
+        path: "hr/payment-history",
+        element: <PaymentHistory></PaymentHistory>
       },
 
 

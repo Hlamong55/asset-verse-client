@@ -25,7 +25,7 @@ const HRRegister = () => {
         dateOfBirth: data.dateOfBirth,
         packageLimit: 5,
         currentEmployees: 0,
-        subscription: "basic",
+        subscription: "Basic",
         createdAt: new Date(),
       };
 
