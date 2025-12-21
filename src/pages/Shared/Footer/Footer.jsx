@@ -7,7 +7,7 @@ import { TbWorldPlus } from "react-icons/tb";
 const Footer = () => {
   return (
     <div>
-      <footer className="footer sm:footer-horizontal bg-base-200 text-base-content p-8 md:pl-28">
+      <footer className="footer sm:footer-horizontal bg-base-200 border-t border-gray-400 text-base-content p-8 md:pl-28">
         <nav>
           <h6 className="footer-title">Services</h6>
           <Link className="hover:underline hover:text-[#4FAE33] ">
@@ -73,12 +73,12 @@ const Footer = () => {
           <Link className="hover:underline hover:text-[#4FAE33]"></Link>
         </nav>
       </footer>
-      <footer className="bg-base-200 text-base-content border-t border-base-300 px-10 py-4">
+      <footer className="bg-base-200 text-base-content border-t border-gray-400 shadow-2xl px-10 py-4">
         <div className="flex flex-col-reverse md:flex-row items-center justify-between w-full">
           <div className="flex items-center gap-2">
            <span>
              <Logo />
-             <p className="text-xs text-gray-600">Copyright © {new Date().getFullYear()} - All right reserved by AssetVerse Ltd</p>
+             <p className="text-xs mt-1.5 text-gray-700">Copyright © {new Date().getFullYear()} - All right reserved by AssetVerse Ltd</p>
            </span>
           </div>
 

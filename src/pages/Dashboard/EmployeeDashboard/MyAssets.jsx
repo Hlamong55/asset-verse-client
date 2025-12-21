@@ -127,40 +127,53 @@ const MyAssets = () => {
       </div>
 
       ) : (
-        <div className="overflow-x-auto mt-14">
-          <table className="table table-zebra">
+        <div className="w-full overflow-x-auto mt-14">
+          <table className="table table-zebra min-w-225">
             <thead>
               <tr>
                 <th>Asset</th>
                 <th>Company</th>
                 <th>Type</th>
-                <th>Request Date</th>
+                <th className="hidden md:table-cell">Request Date</th>
                 <th>Approval Date</th>
                 <th>Status</th>
-                <th>Action</th>
+                <th className="hidden md:table-cell">Action</th>
               </tr>
             </thead>
 
             <tbody>
               {filteredAssets.map((a) => (
                 <tr key={a._id}>
-                  <td className="flex items-center gap-3">
+                  <td className="flex items-center gap-3 font-semibold">
                     <img
                       src={a.assetImage}
-                      className="w-10 h-10 rounded"
+                      className="w-14 h-14 rounded"
                     />
                     {a.assetName}
                   </td>
-                  <td>{a.companyName}</td>
-                  <td>{a.assetType}</td>
-                  <td>{new Date(a.requestDate).toLocaleDateString()}</td>
-                  <td>{new Date(a.assignmentDate).toLocaleDateString()}</td>
+                  <td className="font-semibold text-lg">{a.companyName}</td>
+
                   <td>
-                    <span className="badge badge-success">
+                     <span
+                        className={`badge ${
+                          a.assetType === "Returnable"
+                            ? "badge-success"
+                            : "badge-warning"
+                        }`}
+                      >
+                        {a.assetType}
+                      </span>
+                    </td>
+
+                  <td className="hidden sm:table-cell font-semibold">{new Date(a.requestDate).toLocaleDateString()}</td>
+
+                  <td className="font-semibold">{new Date(a.assignmentDate).toLocaleDateString()}</td>
+                  <td>
+                    <span className="badge badge-primary">
                       {a.status}
                     </span>
                   </td>
-                  <td>
+                  <td className="hidden sm:table-cell">
                     {a.status === "assigned" &&
                       a.assetType === "Returnable" && (
                         <button

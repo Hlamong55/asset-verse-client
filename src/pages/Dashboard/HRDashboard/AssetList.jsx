@@ -83,15 +83,15 @@ const AssetList = () => {
 
       {!isLoading && assets.length > 0 && (
         <>
-          <div className="overflow-x-auto bg-base-100 rounded-lg shadow">
-            <table className="table table-zebra">
+          <div className="w-full overflow-x-auto bg-base-100 rounded-lg shadow">
+            <table className="table table-zebra min-w-225">
               <thead>
                 <tr>
                   <th>Image</th>
                   <th>Name</th>
                   <th>Type</th>
                   <th>Quantity</th>
-                  <th>Date</th>
+                  <th className="hidden md:table-cell">Date</th>
                   <th className="text-center">Action</th>
                 </tr>
               </thead>
@@ -119,10 +119,10 @@ const AssetList = () => {
                       </span>
                     </td>
                     <td className="font-semibold">{asset.productQuantity}</td>
-                    <td className="font-semibold">
+                    <td className="hidden sm:table-cell font-semibold">
                       {new Date(asset.dateAdded).toLocaleDateString()}
                     </td>
-                    <td className="flex gap-2 justify-center">
+                    <td className="flex flex-col md:flex-row gap-2 justify-center">
                       <button
                         className="btn btn-sm btn-outline btn-success transition-transform duration-300 hover:scale-105"
                         onClick={() => setSelectedAsset(asset)}

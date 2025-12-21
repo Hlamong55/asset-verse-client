@@ -31,7 +31,7 @@ const ContactCTA = () => {
           <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
 
             <a
-            href="/contact"
+            href="/support"
             className="btn btn-primary px-8 py-6 text-lg rounded 
                transition-transform duration-200 hover:scale-105 active:scale-95"
             >
@@ -41,7 +41,7 @@ const ContactCTA = () => {
             </a>
 
             <a
-            href="/demo"
+            href="/user-register"
             className="btn btn-outline px-8 py-6 text-lg rounded hover:border-[#4FAE33] hover:text-[#4FAE34] transition-transform duration-200 hover:scale-105 active:scale-95"
             >
             <span className="flex items-center gap-2">

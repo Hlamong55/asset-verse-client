@@ -86,8 +86,8 @@ const AllRequest = () => {
         Manage employee asset requests
       </p>
 
-      <div className="overflow-x-auto mt-6">
-        <table className="table table-zebra">
+      <div className="w-full overflow-x-auto mt-6">
+        <table className="table table-zebra min-w-225">
           <thead>
             <tr>
               <th>Employee</th>
@@ -129,7 +129,7 @@ const AllRequest = () => {
 
                 </td>
 
-                <td className="text-center space-x-2">
+                <td className="flex flex-col md:flex-row gap-2 justify-center">
                   {req.requestStatus === "pending" ? (
                     <>
                       <button

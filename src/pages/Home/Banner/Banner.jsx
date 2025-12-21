@@ -81,7 +81,7 @@ const Banner = () => {
               variants={itemUp}
               className="mt-7 flex flex-col sm:flex-row sm:justify-center gap-4"
             >
-              <Link to="/join-hr" className="inline-block">
+              <Link to="/hr-register" className="inline-block">
                 <motion.button
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.98 }}
@@ -94,7 +94,7 @@ const Banner = () => {
                 </motion.button>
               </Link>
 
-              <Link to="/join-employee" className="inline-block">
+              <Link to="/user-register" className="inline-block">
                 <motion.button
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.98 }}

@@ -19,6 +19,9 @@ import EmployeeProfile from "../pages/Dashboard/EmployeeDashboard/EmployeeProfil
 import UpgradePackage from "../pages/Dashboard/HRDashboard/UpgradePackage";
 import PaymentSuccess from "../pages/Dashboard/HRDashboard/Payment/PaymentSuccess";
 import PaymentHistory from "../pages/Dashboard/HRDashboard/Payment/PaymentHistory";
+import About from "../pages/About/About";
+import Support from "../pages/Home/Support/Support";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 
 export const router = createBrowserRouter([
@@ -27,8 +30,16 @@ export const router = createBrowserRouter([
     element: <RootLayout></RootLayout>,
     children: [
         {
-            index: true,
-            element: <Home></Home>
+          index: true,
+          element: <Home></Home>
+        },
+        {
+          path: "about",
+          element: <About></About>
+        },
+        {
+          path: "support",
+          element: <Support></Support>
         }
     ]
   },
@@ -111,5 +122,9 @@ export const router = createBrowserRouter([
         element: <EmployeeProfile></EmployeeProfile>
       }
     ]
+  },
+  {
+    path: "*",
+    element: <ErrorPage></ErrorPage>
   }
 ]);

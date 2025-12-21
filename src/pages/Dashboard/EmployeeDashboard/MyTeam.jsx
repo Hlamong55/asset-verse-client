@@ -20,7 +20,7 @@ const MyTeam = () => {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 px-10 mx-auto">
       <div className="text-center">
         <h2 className="text-4xl font-extrabold flex items-center justify-center gap-2">
           <FaUsers /> My Team
@@ -32,7 +32,7 @@ const MyTeam = () => {
 
 
       <div className="flex justify-center">
-        <select className="select select-bordered max-w-xs">
+        <select className="select select-bordered max-w-sm border-2 border-primary">
           {companies.map((c) => (
             <option key={c._id}>{c.companyName}</option>
           ))}
@@ -49,7 +49,7 @@ const MyTeam = () => {
           {team.map((member) => (
             <div
               key={member._id}
-              className="bg-base-100 rounded-xl shadow hover:shadow-lg transition p-6 flex items-center gap-4"
+              className="bg-base-100 rounded-xl shadow hover:shadow-lg transition p-6 flex items-center gap-5"
             >
               <img
                 src={
@@ -57,13 +57,13 @@ const MyTeam = () => {
                   "https://i.ibb.co/0Jmshvb/avatar.png"
                 }
                 alt=""
-                className="w-14 h-14 rounded-full object-cover border"
+                className="w-16 h-16 rounded-full object-cover border"
               />
 
               <div>
-                <h4 className="font-semibold text-lg">{member.name}</h4>
-                <p className="text-sm text-gray-500">{member.email}</p>
-                <span className="badge badge-outline badge-primary mt-2">
+                <h4 className="font-bold text-lg">{member.name}</h4>
+                <p className=" text-gray-600">{member.email}</p>
+                <span className="badge badge-outline badge-primary mt-2 font-semibold">
                   {member.role === "hr" ? "HR Manager" : "Employee"}
                 </span>
               </div>
@@ -73,7 +73,7 @@ const MyTeam = () => {
       )}
 
       {/* birthdays */}
-      <div className="bg-base-100 rounded-xl p-6 shadow">
+      <div className="bg-base-100 rounded-xl p-6 shadow-lg">
         <h3 className="text-2xl font-bold flex items-center gap-2 mb-4">
           <FaBirthdayCake className="text-pink-500" />
           Upcoming Birthdays
@@ -88,7 +88,7 @@ const MyTeam = () => {
             {birthdays.map((b) => (
               <div
                 key={b._id}
-                className="border rounded-lg p-4 flex items-center gap-3"
+                className="border rounded-lg p-4 flex items-center gap-5 bg-blue-100"
               >
                 <img
                   src={
@@ -100,8 +100,8 @@ const MyTeam = () => {
                 />
 
                 <div>
-                  <p className="font-medium">{b.name}</p>
-                  <p className="text-sm text-gray-500">
+                  <p className="font-bold">{b.name}</p>
+                  <p className="text-sm text-gray-600 font-medium">
                     🎂 {new Date(b.dateOfBirth).toDateString()}
                   </p>
                 </div>

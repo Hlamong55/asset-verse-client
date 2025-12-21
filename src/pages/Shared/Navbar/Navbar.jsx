@@ -1,150 +1,153 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
 import Logo from "../../../components/Logo/Logo";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
-  const [dbUser, setDbUser] = useState(null);
-
   const { user, logOutUser } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [dbUser, setDbUser] = useState(null);
 
   useEffect(() => {
-    if (user?.email) {
-      axiosSecure.get(`/users/${user.email}`).then((res) => {
-        setDbUser(res.data);
-      });
+    if (!user?.email) {
+      // setDbUser(null);
+      return;
     }
-  }, [user, axiosSecure]);
 
-  const hoverClass = "hover:text-primary hover:underline";
-
-  const publicLinks = [
-    { to: "/", label: "Home" },
-    { to: "/login", label: "Login" },
-    { to: "/user-register", label: "Join as Employee" },
-    { to: "/hr-register", label: "Join as HR Manager" },
-  ];
-
-  const employeeLinks = [
-    { to: "/dashboard/employee", label: "My Assets" },
-    { to: "/dashboard/employee/team", label: "My Team" },
-    { to: "/dashboard/employee/request", label: "Request Asset" },
-    { to: "/dashboard/profile", label: "Profile" },
-  ];
-
-  const hrLinks = [
-    { to: "/dashboard/hr/asset-list", label: "Asset List" },
-    { to: "/dashboard/hr/add-asset", label: "Add Asset" },
-    { to: "/dashboard/hr/requests", label: "All Requests" },
-    { to: "/dashboard/hr/emply-list", label: "Employee List" },
-    { to: "/dashboard/hr/profile", label: "Profile" },
-  ];
+    axiosSecure
+      .get(`/users/${user.email}`)
+      .then((res) => setDbUser(res.data))
+      .catch(() => setDbUser(null));
+  }, [user?.email, axiosSecure]);
 
   const handleLogout = async () => {
     await logOutUser();
     localStorage.removeItem("access-token");
-    setOpen(false);
   };
 
-  const renderLinks = (links) =>
-    links.map((l) => (
-      <li key={l.to}>
-        <NavLink
-          to={l.to}
-          onClick={() => setOpen(false)}
-          className={({ isActive }) =>
-            `block px-3 py-2 rounded-md transition ${
-              isActive ? "text-primary font-medium" : hoverClass
-            }`
-          }
-        >
-          {l.label}
-        </NavLink>
-      </li>
-    ));
+  const navLinkClass = ({ isActive }) =>
+    `px-3 py-2 font-medium transition-all duration-200
+     ${
+       isActive
+         ? "text-primary underline underline-offset-4"
+         : "hover:text-primary hover:underline underline-offset-4"
+     }`;
 
   return (
-    <header className="w-full bg-base-200 shadow">
-      <nav className="max-w-7xl mx-auto px-4 lg:px-10">
+    <header className="sticky top-0 z-50 bg-gray-100 border-b shadow-xl">
+      <nav className="max-w-7xl mx-auto py-2 px-4 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="shrink-0">
+
+          <div className="flex items-center gap-3">
+            {/* hamburger */}
+            <div className="lg:hidden dropdown">
+              <label tabIndex={0} className="btn btn-ghost btn-circle">
+                <FaBars className="text-xl" />
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded box w-48"
+              >
+                <li><NavLink to="/" className={navLinkClass}>Home</NavLink></li>
+                <li><NavLink to="/about" className={navLinkClass}>About</NavLink></li>
+                <li><NavLink to="/support" className={navLinkClass}>Support</NavLink></li>
+                <Link
+                  to="/login"
+                  className="btn btn-sm btn-outline btn-primary hover:scale-105 transition"
+                >
+                  Login
+                </Link>
+              </ul>
+            </div>
+
             <Logo />
           </div>
 
-          <div className="hidden lg:flex items-center gap-4">
-            {!user && <ul className="flex gap-4">{renderLinks(publicLinks)}</ul>}
+          <div className="hidden lg:flex items-center gap-2">
+            <NavLink to="/" className={navLinkClass}>Home</NavLink>
+            <NavLink to="/about" className={navLinkClass}>About</NavLink>
+            <NavLink to="/support" className={navLinkClass}>Support</NavLink>
+          </div>
+
+          <div className="flex items-center gap-3">
+
+            {!user && (
+              <div className="hidden lg:flex items-center gap-3">
+
+                <Link
+                  to="/login"
+                  className="btn btn-outline btn-primary hover:scale-105 transition"
+                >
+                  Login
+                </Link>
+                
+                <Link
+                  to="/hr-register"
+                  className="btn btn-primary hover:scale-105 transition"
+                >
+                  Join as HR
+                </Link>
+                <Link
+                  to="/user-register"
+                  className="btn btn-primary hover:scale-105 transition"
+                >
+                  Join as Employee
+                </Link>
+              </div>
+            )}
 
             {user && dbUser && (
               <div className="dropdown dropdown-end">
-                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                  <div className="w-10 rounded-full">
+                <label tabIndex={0} className="btn btn-ghost avatar">
+                  <div className="w-14 h-14 rounded-full  ring ring-primary ring-offset-2">
                     <img
                       src={
-                        user.companyLogo ||
+                        dbUser.profileImage ||
+                        dbUser.companyLogo ||
                         "https://i.ibb.co/9m9PpJk/avatar.png"
                       }
-                      alt="avatar"
+                      alt="profile"
                     />
                   </div>
                 </label>
 
                 <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                  className="menu dropdown-content mt-3 p-3 shadow-lg bg-base-100 rounded-xl w-56 space-y-1"
                 >
-                  {dbUser.role === "hr"
-                    ? renderLinks(hrLinks)
-                    : renderLinks(employeeLinks)}
+                  {dbUser.role === "employee" && (
+                    <>
+                      <li><NavLink to="/dashboard/employee" className={navLinkClass}>My Assets</NavLink></li>
+                      <li><NavLink to="/dashboard/employee/team" className={navLinkClass}>My Team</NavLink></li>
+                      <li><NavLink to="/dashboard/employee/request" className={navLinkClass}>Request Asset</NavLink></li>
+                      <li><NavLink to="/dashboard/profile" className={navLinkClass}>Profile</NavLink></li>
+                    </>
+                  )}
 
-                  <li>
-                    <button onClick={handleLogout} className="text-error">
+                  {dbUser.role === "hr" && (
+                    <>
+                      <li><NavLink to="/dashboard/hr/asset-list" className={navLinkClass}>Asset List</NavLink></li>
+                      <li><NavLink to="/dashboard/hr/add-asset" className={navLinkClass}>Add Asset</NavLink></li>
+                      <li><NavLink to="/dashboard/hr/requests" className={navLinkClass}>All Requests</NavLink></li>
+                      <li><NavLink to="/dashboard/hr/emply-list" className={navLinkClass}>Employee List</NavLink></li>
+                      <li><NavLink to="/dashboard/hr/profile" className={navLinkClass}>Profile</NavLink></li>
+                    </>
+                  )}
+
+                  <li className="border-t pt-2">
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left text-error hover:bg-error/10 px-3 py-2 rounded-md"
+                    >
                       Logout
                     </button>
                   </li>
                 </ul>
               </div>
             )}
-          </div>
 
-          {/* responsive */}
-          <div className="lg:hidden">
-            <button
-              onClick={() => setOpen(!open)}
-              className="p-2 rounded-md focus:outline-none"
-            >
-              {open ? <FaTimes /> : <FaBars />}
-            </button>
-          </div>
-        </div>
-
-        <div
-          className={`lg:hidden transition-all duration-200 overflow-hidden ${
-            open ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-          }`}
-        >
-          <div className="bg-base-100 border border-base-300 rounded-lg mt-2 p-3">
-            {!user && <ul className="space-y-1">{renderLinks(publicLinks)}</ul>}
-
-            {user && dbUser && (
-              <ul className="space-y-1">
-                {dbUser.role === "hr"
-                  ? renderLinks(hrLinks)
-                  : renderLinks(employeeLinks)}
-
-                <li>
-                  <button
-                    onClick={handleLogout}
-                    className="w-full text-left px-3 py-2 text-error"
-                  >
-                    Logout
-                  </button>
-                </li>
-              </ul>
-            )}
           </div>
         </div>
       </nav>

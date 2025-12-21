@@ -45,7 +45,7 @@ const itemVariants = {
 
 const About = () => {
   return (
-    <section className="bg-base-100 py-12">
+    <section className="bg-gray-100 py-12">
       <div className="max-w-7xl mx-auto p-6">
         <div className="md:grid md:grid-cols-2 items-center">
        
@@ -61,7 +61,7 @@ const About = () => {
             </p>
 
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
-              <Link to="/join-hr" className="inline-block">
+              <Link to="/login" className="inline-block">
                 <motion.button
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.98 }}
@@ -74,7 +74,7 @@ const About = () => {
                 </motion.button>
               </Link>
 
-              <Link to="/join-employee" className="inline-block">
+              <Link to="/support" className="inline-block">
                 <motion.button
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.98 }}

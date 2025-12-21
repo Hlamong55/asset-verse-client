@@ -1,16 +1,124 @@
-# React + Vite
+# AssetVerse 🧩  
+A modern Corporate Asset Management System for HR Managers and Employees
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 Project Purpose
+AssetVerse is a B2B (Business-to-Business) full-stack web application designed to help organizations manage company assets efficiently.  
+HR managers can track, assign, approve, and analyze assets, while employees can request, manage, and return assigned assets — all from a centralized dashboard.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌐 Live Website
+🔗 **Live URL:** https://assetverse.netlify.app  
+🔗 **Server URL:** https://assetverse.netlify.app  
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 👤 User Roles
+### 🔹 HR Manager
+- Manage company assets
+- Approve or reject employee asset requests
+- Assign assets automatically on approval
+- Track employees and company affiliations
+- Upgrade subscription packages
+- View analytics & payment history
 
-## Expanding the ESLint configuration
+### 🔹 Employee
+- Request assets from affiliated companies
+- View assigned assets
+- Return returnable assets
+- View team members
+- Manage personal profile
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## ✨ Key Features
+
+### 🧑‍💼 HR Dashboard
+- Asset List with **search, pagination, edit & delete**
+- Request approval system with **package employee limit validation**
+- Employee list with asset count
+- Dynamic charts:
+  - 📊 Pie chart (Returnable vs Non-returnable)
+  - 📈 Bar chart (Top requested assets)
+- Package upgrade with **Stripe payment**
+- Payment history tracking
+
+### 👨‍💻 Employee Dashboard
+- View assigned assets (from all companies)
+- Search & filter assets by type
+- Return assets (if returnable)
+- Print asset list
+- My Team page with:
+  - Company-based colleagues
+  - Upcoming birthdays
+- Profile management with photo upload
+
+### 🔐 Authentication & Security
+- JWT-based authentication
+- Role-based route protection
+- Secure API calls with Axios interceptors
+
+---
+
+## 🧱 Tech Stack
+
+### Frontend
+- **React**
+- **React Router**
+- **Tailwind CSS**
+- **DaisyUI**
+- **React Hook Form**
+- **TanStack React Query**
+- **Framer Motion**
+- **SweetAlert2**
+- **Axios**
+
+### Backend
+- **Node.js**
+- **Express.js**
+- **MongoDB**
+- **JWT Authentication**
+- **Stripe API**
+
+---
+
+## 📦 NPM Packages Used
+
+### Frontend
+```bash
+react
+react-router-dom
+@tanstack/react-query
+react-hook-form
+axios
+sweetalert2
+framer-motion
+react-icons
+
+### Backend
+express
+cors
+dotenv
+mongodb
+jsonwebtoken
+stripe
+
+---
+
+### 🚀 How to Run Locally
+
+## Frontend
+npm install
+npm run dev
+
+## Backend
+npm install
+nodemon index.js
+
+## Environment Variables
+DB_USER=your_db_user
+DB_PASS=your_db_password
+JWT_SECRET=your_jwt_secret
+STRIPE_SECRET_KEY=your_stripe_key
+CLIENT_URL=http://localhost:5173
+

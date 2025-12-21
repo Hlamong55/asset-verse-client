@@ -71,14 +71,14 @@ const EmployeeList = () => {
       )}
 
       {employees.length > 0 && (
-        <div className="overflow-x-auto mt-6">
-          <table className="table table-zebra">
+        <div className="w-full overflow-x-auto mt-6">
+          <table className="table table-zebra min-w-225">
             <thead>
               <tr>
                 <th >Employee</th>
                 <th>Email</th>
                 <th>Join Date</th>
-                <th className="text-center">Assets</th>
+                <th className="text-center hidden md:table-cell">Assets</th>
                 <th className="text-center">Action</th>
               </tr>
             </thead>
@@ -95,7 +95,7 @@ const EmployeeList = () => {
                       alt=""
                       className="w-14 h-14 rounded-full object-cover"
                     />
-                    <span className="text-lg font-bold">{emp.name}</span>
+                    <span className="text-lg font-bold hidden sm:table-cell">{emp.name}</span>
                   </td>
 
                   <td className="text-lg font-semibold">{emp.email}</td>
@@ -104,7 +104,7 @@ const EmployeeList = () => {
                     {new Date(emp.joinDate).toLocaleDateString()}
                   </td>
 
-                  <td className="font-semibold text-center text-lg">
+                  <td className="font-semibold text-center text-lg hidden sm:table-cell">
                     {emp.assetsCount}
                   </td>
 
