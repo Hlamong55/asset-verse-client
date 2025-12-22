@@ -8,8 +8,8 @@ HR managers can track, assign, approve, and analyze assets, while employees can 
 ---
 
 ## 🌐 Live Website
-🔗 **Live URL:** https://assetverse.netlify.app  
-🔗 **Server URL:** https://assetverse.netlify.app  
+🔗 **Live URL:** https://asset-verse-5bd83.web.app/  
+🔗 **Server URL:** https://asset-verse-server-lilac-sigma.vercel.app  
 
 ---
 
