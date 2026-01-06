@@ -112,6 +112,36 @@ const Login = () => {
           HR Manager
         </Link>
       </p>
+
+      <div className="flex gap-5">
+            <button
+          type="button"
+          onClick={() =>
+            setFormData({
+              email: "hilltech@gmail.com",
+              password: "12345hill@",
+            })
+          }
+          className="w-full mt-6 bg-gray-300 hover:bg-gray-600 hover:text-white font-semibold py-2 rounded-lg hover:scale-105 transition"
+        >
+          🚀 Use HR Account <br />
+           <span className="text-xs">(Click Here to Prefilled)</span>
+        </button>
+
+            <button
+          type="button"
+          onClick={() =>
+            setFormData({
+              email: "tazing@user1.com",
+              password: "tazing@user1",
+            })
+          }
+          className="w-full mt-6 bg-gray-300 hover:bg-gray-600 hover:text-white font-semibold py-2 rounded-lg hover:scale-105 transition"
+        >
+          🚀 Use Employee Accnt <br />
+          <span className="text-xs">(Click Here to Prefilled)</span>
+        </button>
+      </div>
     </form>
   );
 };
