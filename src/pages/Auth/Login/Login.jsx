@@ -4,7 +4,6 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
-
 const Login = () => {
   const { signInUser } = useAuth();
   const axiosSecure = useAxiosSecure();
@@ -13,6 +12,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    setValue,           // ✅ ADD THIS
     formState: { errors },
   } = useForm();
 
@@ -28,29 +28,28 @@ const Login = () => {
       const userRes = await axiosSecure.get(`/users/${data.email}`);
       const role = userRes.data.role;
 
-    Swal.fire({
-      icon: "success",
-      title: "Login Successful 🎉",
-      text: "Welcome back to AssetVerse!!",
-      timer: 1500,
-      showConfirmButton: false,
-    });
+      Swal.fire({
+        icon: "success",
+        title: "Login Successful 🎉",
+        text: "Welcome back to AssetVerse!!",
+        timer: 1500,
+        showConfirmButton: false,
+      });
 
-    setTimeout(() => {
-      if (role === "hr") {
-        navigate("/dashboard/hr/asset-list");
-      } else {
-        navigate("/dashboard/employee/assets");
-      }
-    }, 1500);
-
+      setTimeout(() => {
+        if (role === "hr") {
+          navigate("/dashboard/hr/asset-list");
+        } else {
+          navigate("/dashboard/employee/assets");
+        }
+      }, 1500);
     } catch (err) {
       console.error(err);
-    Swal.fire({
-      icon: "error",
-      title: "Login Failed",
-      text: "Invalid email or password",
-    });
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: "Invalid email or password",
+      });
     }
   };
 
@@ -104,42 +103,47 @@ const Login = () => {
 
       <p className="text-sm text-center text-gray-600">
         New here? Join as{" "}
-        <Link to="/user-register" className="text-primary font-semibold hover:text-green-700 hover:underline">
-           Employee
+        <Link
+          to="/user-register"
+          className="text-primary font-semibold hover:text-green-700 hover:underline"
+        >
+          Employee
         </Link>{" "}
         or{" "}
-        <Link to="/hr-register" className="text-primary font-semibold hover:text-green-700 hover:underline">
+        <Link
+          to="/hr-register"
+          className="text-primary font-semibold hover:text-green-700 hover:underline"
+        >
           HR Manager
         </Link>
       </p>
 
+      {/* 🔥 PREFILL BUTTONS */}
       <div className="flex gap-5">
-            <button
+        <button
           type="button"
-          onClick={() =>
-            setFormData({
-              email: "hilltech@gmail.com",
-              password: "12345hill@",
-            })
-          }
-          className="w-full mt-6 bg-gray-300 hover:bg-gray-600 hover:text-white font-semibold py-2 rounded-lg hover:scale-105 transition"
+          onClick={() => {
+            setValue("email", "hilltech@gmail.com");
+            setValue("password", "12345hill@");
+          }}
+          className="w-full mt-6 bg-gray-300 hover:bg-gray-600 hover:text-white
+                     font-semibold py-2 rounded-lg hover:scale-105 transition"
         >
           🚀 Use HR Account <br />
-           <span className="text-xs">(Click Here to Prefilled)</span>
+          <span className="text-xs">(Click Here to Prefill)</span>
         </button>
 
-            <button
+        <button
           type="button"
-          onClick={() =>
-            setFormData({
-              email: "tazing@user1.com",
-              password: "tazing@user1",
-            })
-          }
-          className="w-full mt-6 bg-gray-300 hover:bg-gray-600 hover:text-white font-semibold py-2 rounded-lg hover:scale-105 transition"
+          onClick={() => {
+            setValue("email", "tazing@user1.com");
+            setValue("password", "tazing@user1");
+          }}
+          className="w-full mt-6 bg-gray-300 hover:bg-gray-600 hover:text-white
+                     font-semibold py-2 rounded-lg hover:scale-105 transition"
         >
-          🚀 Use Employee Accnt <br />
-          <span className="text-xs">(Click Here to Prefilled)</span>
+          🚀 Use Employee Account <br />
+          <span className="text-xs">(Click Here to Prefill)</span>
         </button>
       </div>
     </form>
