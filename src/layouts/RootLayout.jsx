@@ -5,9 +5,11 @@ import Footer from '../pages/Shared/Footer/Footer';
 
 const RootLayout = () => {
     return (
-        <div className='max-w-7xl mx-auto bg-gray-200'>
+        <div className=''>
             <Navbar></Navbar>
-            <Outlet></Outlet>
+            <main className='max-w-7xl mx-auto bg-gray-200'>
+                <Outlet></Outlet>
+            </main>
             <Footer></Footer>
         </div>
     );

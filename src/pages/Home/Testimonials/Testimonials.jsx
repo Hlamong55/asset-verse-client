@@ -22,8 +22,8 @@ const Testimonials = ({ testimonialsPromise }) => {
   const { testimonials, stats, trust_logos } = data;
 
   return (
-    <section className="py-20 bg-base-100">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-24 bg-base-100">
+      <div className="max-w-7xl mx-auto px-6 space-y-24">
         {/* heading text */}
         <div className="text-center mb-10">
           <p className="text-sm font-semibold text-[#2563eb]">
@@ -40,17 +40,17 @@ const Testimonials = ({ testimonialsPromise }) => {
         </div>
 
         {stats && (
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-10">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 my-14">
             {stats.map((s) => (
               <div
                 key={s.id}
-                className="flex flex-col items-start bg-blue-100 p-6 rounded-lg border border-base-200 shadow-sm"
+                className="flex flex-col items-center bg-blue-100 p-6 rounded-lg border border-base-200 shadow-sm"
               >
                 <div className="text-2xl font-extrabold text-gray-900">
                   {s.value.toLocaleString()}
                   {s.id === "fulfillment" && "%"}
                 </div>
-                <div className="mt-2 text-sm text-gray-800">{s.label}</div>
+                <div className="mt-2 text-sm">{s.label}</div>
               </div>
             ))}
           </div>

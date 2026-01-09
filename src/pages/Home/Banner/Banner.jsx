@@ -5,7 +5,7 @@ import { Link } from "react-router";
 
 const Banner = () => {
   const overlayColor = "rgba(255,255,255,0.30)";
-  const overlayBlur = "8px";
+  const overlayBlur = "10px";
 
   const containerVariants = {
     hidden: { opacity: 0 },

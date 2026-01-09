@@ -38,8 +38,8 @@ const Footer = () => {
         </nav>
         <nav>
           <h6 className="footer-title">Company</h6>
-          <Link className="hover:underline hover:text-[#4FAE33]">About us</Link>
-          <Link className="hover:underline hover:text-[#4FAE33]">Contact</Link>
+          <Link to="/about" className="hover:underline hover:text-[#4FAE33]">About us</Link>
+          <Link to="/support"  className="hover:underline hover:text-[#4FAE33]">Support</Link>
           <Link className="hover:underline hover:text-[#4FAE33]">Jobs</Link>
           <Link className="hover:underline hover:text-[#4FAE33]">
             Press kit
@@ -62,7 +62,7 @@ const Footer = () => {
           <h6 className="footer-title">Contact</h6>
           <Link className="hover:underline hover:text-[#4FAE33]">
             <span className="flex items-center gap-2">
-              <TfiEmail size={20} /> support@assetverse.com
+              <TfiEmail size={20} /> bijoymarma55@gmail.com
             </span>
           </Link>
           <Link className="hover:underline hover:text-[#4FAE33] mt-2">

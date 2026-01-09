@@ -36,8 +36,8 @@ const Navbar = () => {
      }`;
 
   return (
-    <header className="sticky top-0 z-50 bg-gray-100 border-b shadow-xl">
-      <nav className="max-w-7xl mx-auto py-2 px-4 lg:px-8">
+    <header className="sticky top-0 z-50 bg-gray-100 shadow-md">
+      <nav className="max-w-7xl mx-auto py-1.5 px-4 lg:px-5">
         <div className="flex items-center justify-between h-16">
 
           <div className="flex items-center gap-3">
@@ -101,7 +101,7 @@ const Navbar = () => {
             {user && dbUser && (
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost avatar">
-                  <div className="w-14 h-14 rounded-full  ring ring-primary ring-offset-2">
+                  <div className="w-14n h-14 rounded-full  ring ring-primary ring-offset-2">
                     <img
                       src={
                         dbUser.profileImage ||

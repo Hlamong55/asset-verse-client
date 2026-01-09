@@ -4,8 +4,10 @@ import { useNavigate } from "react-router";
 import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-  baseURL: "https://asset-verse-server-lilac-sigma.vercel.app",
+  baseURL: "http://localhost:3000",
 });
+
+// https://asset-verse-server-lilac-sigma.vercel.app
 
 const useAxiosSecure = () => {
   const { logOutUser } = useAuth();
