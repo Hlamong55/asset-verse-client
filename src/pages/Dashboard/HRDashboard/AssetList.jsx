@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams, Link } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -14,10 +14,34 @@ const AssetList = () => {
   const [page, setPage] = useState(pageFromURL);
   const [selectedAsset, setSelectedAsset] = useState(null);
 
+  // 🔹 states
+  const [search, setSearch] = useState("");
+  const [filterType, setFilterType] = useState("all");
+
+  /* ================= 🔥 FIX START ================= */
+  useEffect(() => {
+    setPage(1);
+    setSearchParams({
+      page: 1,
+      limit,
+      ...(search && { search }),
+      ...(filterType !== "all" && { type: filterType }),
+    });
+  }, [search, filterType, limit, setSearchParams]);
+  /* ================= 🔥 FIX END ================= */
+
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["assets", page, limit],
+    queryKey: ["assets", page, limit, search, filterType],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/assets?page=${page}&limit=${limit}`);
+      const params = new URLSearchParams({
+        page,
+        limit,
+      });
+
+      if (search) params.append("search", search);
+      if (filterType !== "all") params.append("type", filterType);
+
+      const res = await axiosSecure.get(`/assets?${params.toString()}`);
       return res.data;
     },
     keepPreviousData: true,
@@ -31,32 +55,32 @@ const AssetList = () => {
     setSearchParams({ page: newPage, limit });
   };
 
-
-
-
   const handleDelete = async (id) => {
-  const res = await Swal.fire({
-    title: "Are you sure?",
-    text: "This asset will be permanently deleted",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!",
-  });
+    const res = await Swal.fire({
+      title: "Are you sure?",
+      text: "This asset will be permanently deleted",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
 
-  if (res.isConfirmed) {
-    await axiosSecure.delete(`/assets/${id}`);
-    Swal.fire("Deleted!", "Asset has been deleted.", "success");
-    refetch();
-  }
+    if (res.isConfirmed) {
+      await axiosSecure.delete(`/assets/${id}`);
+      Swal.fire("Deleted!", "Asset has been deleted.", "success");
+      refetch();
+    }
   };
 
-
-  if (isLoading) {
-    return <div className="text-center py-40">Loading...</div>;
-  }
-
-
+  const SkeletonRow = () => (
+    <tr>
+      {[...Array(6)].map((_, i) => (
+        <td key={i}>
+          <div className="h-4 bg-base-300 rounded animate-pulse"></div>
+        </td>
+      ))}
+    </tr>
+  );
 
   return (
     <div className="space-y-8 bg-base-100 rounded-xl p-5 shadow-sm">
@@ -67,6 +91,26 @@ const AssetList = () => {
         <p className="text-gray-600 mt-3 max-w-2xl mx-auto text-center">
           View and manage all company assets from a centralized inventory.
         </p>
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-4 justify-between">
+        <input
+          type="text"
+          placeholder="Search by asset name..."
+          className="input input-bordered border-primary max-w-sm"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+
+        <select
+          className="select select-bordered border-primary max-w-sm"
+          value={filterType}
+          onChange={(e) => setFilterType(e.target.value)}
+        >
+          <option value="all">All Categories</option>
+          <option value="Returnable">Returnable</option>
+          <option value="Non-returnable">Non-returnable</option>
+        </select>
       </div>
 
       {!isLoading && assets.length === 0 && (
@@ -81,7 +125,7 @@ const AssetList = () => {
         </div>
       )}
 
-      {!isLoading && assets.length > 0 && (
+      {(isLoading || assets.length > 0) && (
         <>
           <div className="w-full overflow-x-auto bg-base-100 rounded-lg shadow">
             <table className="table table-zebra min-w-225">
@@ -95,84 +139,92 @@ const AssetList = () => {
                   <th className="text-center">Action</th>
                 </tr>
               </thead>
-              <tbody>
-                {assets.map((asset) => (
-                  <tr key={asset._id}>
-                    <td>
-                      <img
-                        src={asset.productImage}
-                        className="w-20 h-14 rounded object-cover"
-                      />
-                    </td>
-                    <td className="text-base font-medium">
-                      {asset.productName}
-                    </td>
-                    <td>
-                      <span
-                        className={`badge ${
-                          asset.productType === "Returnable"
-                            ? "badge-success"
-                            : "badge-warning"
-                        }`}
-                      >
-                        {asset.productType}
-                      </span>
-                    </td>
-                    <td className="font-semibold">{asset.productQuantity}</td>
-                    <td className="hidden sm:table-cell font-semibold">
-                      {new Date(asset.dateAdded).toLocaleDateString()}
-                    </td>
-                    <td className="flex flex-col md:flex-row gap-2 justify-center">
-                      <button
-                        className="btn btn-sm btn-outline btn-success transition-transform duration-300 hover:scale-105"
-                        onClick={() => setSelectedAsset(asset)}
-                      >
-                        Edit
-                      </button>
 
-                      <button
-                        className="btn btn-sm bg-red-600 text-white hover:bg-red-700 transition-transform duration-300 hover:scale-105"
-                        onClick={() => handleDelete(asset._id)}
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+              <tbody>
+                {isLoading
+                  ? [...Array(limit)].map((_, i) => (
+                      <SkeletonRow key={i} />
+                    ))
+                  : assets.map((asset) => (
+                      <tr key={asset._id}>
+                        <td>
+                          <img
+                            src={asset.productImage}
+                            className="w-20 h-14 rounded object-cover"
+                          />
+                        </td>
+                        <td className="text-base font-medium">
+                          {asset.productName}
+                        </td>
+                        <td>
+                          <span
+                            className={`badge ${
+                              asset.productType === "Returnable"
+                                ? "badge-success"
+                                : "badge-warning"
+                            }`}
+                          >
+                            {asset.productType}
+                          </span>
+                        </td>
+                        <td className="font-semibold">
+                          {asset.productQuantity}
+                        </td>
+                        <td className="hidden sm:table-cell font-semibold">
+                          {new Date(asset.dateAdded).toLocaleDateString()}
+                        </td>
+                        <td className="flex flex-col md:flex-row gap-2 justify-center">
+                          <button
+                            className="btn btn-sm btn-outline btn-success transition-transform duration-300 hover:scale-105"
+                            onClick={() => setSelectedAsset(asset)}
+                          >
+                            Edit
+                          </button>
+
+                          <button
+                            className="btn btn-sm bg-red-600 text-white hover:bg-red-700 transition-transform duration-300 hover:scale-105"
+                            onClick={() => handleDelete(asset._id)}
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
               </tbody>
             </table>
           </div>
 
-          {/* pagination */}
-          <div className="flex justify-center items-center gap-2 mt-6">
-            <button
-              className="btn btn-sm"
-              disabled={page === 1}
-              onClick={() => updatePage(page - 1)}
-            >
-              Previous
-            </button>
-
-            {[...Array(totalPages).keys()].map((num) => (
+          {!isLoading && (
+            <div className="flex justify-center items-center gap-2 mt-6">
               <button
-                key={num}
-                onClick={() => updatePage(num + 1)}
-                className={`btn btn-sm ${
-                  page === num + 1 ? "btn-primary" : "btn-outline"
-                }`}
+                className="btn btn-sm"
+                disabled={page === 1}
+                onClick={() => updatePage(page - 1)}
               >
-                {num + 1}
+                Previous
               </button>
-            ))}
 
-            <button
-              className="btn btn-sm"
-              disabled={page === totalPages}
-              onClick={() => updatePage(page + 1)}
-            >
-              Next
-            </button>
-          </div>
+              {[...Array(totalPages).keys()].map((num) => (
+                <button
+                  key={num}
+                  onClick={() => updatePage(num + 1)}
+                  className={`btn btn-sm ${
+                    page === num + 1 ? "btn-primary" : "btn-outline"
+                  }`}
+                >
+                  {num + 1}
+                </button>
+              ))}
+
+              <button
+                className="btn btn-sm"
+                disabled={page === totalPages}
+                onClick={() => updatePage(page + 1)}
+              >
+                Next
+              </button>
+            </div>
+          )}
         </>
       )}
 
