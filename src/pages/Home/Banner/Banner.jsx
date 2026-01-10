@@ -51,7 +51,7 @@ const Banner = () => {
         <circle cx="420" cy="180" r="120" fill="#4FAE33" />
       </svg>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-14 ">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-10 ">
         <div className="min-h-90 flex items-center justify-center">
           <motion.div
             className="w-full max-w-2xl text-center"
@@ -70,11 +70,11 @@ const Banner = () => {
 
             <motion.p
               variants={itemUp}
-              className="mt-4 text-gray-800 font-medium text-base md:text-lg max-w-3xl mx-auto"
+              className="mt-4 text-gray-800 font-medium text-base md:text-lg max-w-5xl mx-auto"
             >
-              AssetVerse helps HR teams track, assign, and manage company assets
-              with complete visibility and zero hassle. Automate workflows,
-              reduce loss, and get real-time insights.
+              AssetVerse helps HR teams track, assign, & manage company assets
+              with visibility and zero hassle. Automate workflows,
+              reduce loss, real-time insights.
             </motion.p>
 
             <motion.div
@@ -110,7 +110,7 @@ const Banner = () => {
 
             <motion.div
               variants={itemUp}
-              className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 justify-center"
+              className="mt-8 grid grid-cols-3  md:grid-cols-6 gap-5 justify-center"
             >
               <div className="flex flex-col items-center text-center">
                 <div className="flex items-center justify-center w-12 h-12 rounded-md border-2 text-white">
