@@ -37,7 +37,7 @@ const FAQ_DATA = [
 
   return (
     <section className="py-16 bg-base-100">
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-10">
           <p className="text-sm font-semibold text-secondary">FAQ</p>
           <h2 className="text-3xl md:text-4xl font-extrabold">

@@ -80,11 +80,11 @@ const Testimonials = ({ testimonialsPromise }) => {
 
         {trust_logos && (
           <div className="mt-12 text-center">
-            <p className="text-sm font-semibold text-[#2563eb] mb-4">
+            <p className="text-sm font-semibold text-[#2563eb] mb-4 ">
               Trusted by leading companies
             </p>
 
-           <div className="overflow-hidden py-6 relative">
+           <div className="overflow-hidden py-6 relative bg-gray-100">
             <style>
             {`
             @keyframes smoothMarquee {

@@ -22,7 +22,7 @@ const TestimoniCard = ({ review }) => {
         p-6 rounded-xl 
         bg-white/90 backdrop-blur 
         shadow-[0_8px_20px_rgba(0,0,0,0.06)] 
-        border border-base-200
+        border border-gray-300
         hover:shadow-[0_10px_26px_rgba(0,0,0,0.1)]
         transition-all duration-300
       "

@@ -37,7 +37,7 @@ const Footer = () => {
               <Link to="/support" className="hover:text-[#4FAE33] hover:underline">Support</Link>
             </li>
             <li>
-              <Link className="hover:text-[#4FAE33] hover:underline">HR Registration</Link>
+              <Link to="/hr-register" className="hover:text-[#4FAE33] hover:underline">HR Registration</Link>
             </li>
           </ul>
         </div>
