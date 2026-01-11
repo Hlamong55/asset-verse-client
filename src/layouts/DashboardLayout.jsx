@@ -153,7 +153,7 @@ const DashboardLayout = () => {
           <button onClick={() => setOpen(true)}>
             <FaBars className="text-xl" />
           </button>
-          <span className="font-bold">Dashboard</span>
+          <span className="font-bold">Welcome to your Dashboard!</span>
         </div>
 
         <main className="flex-1 p-6 overflow-y-auto">
