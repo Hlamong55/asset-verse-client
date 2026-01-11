@@ -85,12 +85,12 @@ const PackagesSection = () => {
 
               <button
                 className="
-                  btn btn-primary w-full mt-8 rounded-full text-lg
+                  btn btn-primary w-full mt-8 rounded-2xl text-lg
                   transition-transform duration-200
                   hover:scale-105 active:scale-95
                 "
               >
-                Choose Plan
+                View Plan
               </button>
             </div>
           ))}

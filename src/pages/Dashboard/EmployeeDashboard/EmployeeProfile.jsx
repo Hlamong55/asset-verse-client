@@ -90,7 +90,7 @@ const handlePhotoChange = async (e) => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="max-w-5xl mx-auto space-y-6">
       <div className="bg-base-100 rounded-2xl p-6 shadow-md flex items-center gap-10">
         <div className="relative">
           <img

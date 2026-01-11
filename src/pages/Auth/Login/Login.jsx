@@ -5,17 +5,18 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const { signInUser } = useAuth();
+  const { signInUser, googleLogin } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
-    setValue,           // ✅ ADD THIS
+    setValue,
     formState: { errors },
   } = useForm();
 
+  // ================= NORMAL LOGIN =================
   const onSubmit = async (data) => {
     try {
       await signInUser(data.email, data.password);
@@ -49,6 +50,56 @@ const Login = () => {
         icon: "error",
         title: "Login Failed",
         text: "Invalid email or password",
+      });
+    }
+  };
+
+  // GOOGLE LOGIN 
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await googleLogin();
+      const user = result.user;
+
+      // save / check user
+      const saveRes = await axiosSecure.post("/users", {
+        name: user.displayName,
+        email: user.email,
+        profileImage: user.photoURL,
+      });
+
+      // get jwt
+      const jwtRes = await axiosSecure.post("/jwt", {
+        email: user.email,
+      });
+      localStorage.setItem("access-token", jwtRes.data.token);
+
+      Swal.fire({
+        icon: "success",
+        title: "Google Login Successful 🎉",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+
+      setTimeout(() => {
+        // new user → complete profile
+        if (!saveRes.data.profileComplete) {
+          navigate("/complete-profile");
+        } 
+        // existing user → role based dashboard
+        else {
+          if (saveRes.data.role === "hr") {
+            navigate("/dashboard/hr/asset-list");
+          } else {
+            navigate("/dashboard/employee/assets");
+          }
+        }
+      }, 1500);
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Google Login Failed",
+        text: "Something went wrong",
       });
     }
   };
@@ -94,7 +145,7 @@ const Login = () => {
 
       <button
         type="submit"
-        className="btn btn-primary w-full mt-2
+        className="btn btn-primary rounded-lg w-full mt-2
                    transition-transform duration-200
                    hover:scale-105 active:scale-95"
       >
@@ -118,8 +169,22 @@ const Login = () => {
         </Link>
       </p>
 
-      {/* 🔥 PREFILL BUTTONS */}
-      <div className="flex gap-5">
+      {/* GOOGLE LOGIN */}
+      <button
+        type="button"
+        onClick={handleGoogleLogin}
+        className="btn btn-outline w-full rounded-lg flex gap-2 transition-transform duration-200
+                   hover:scale-105 active:scale-95"
+      >
+        <img
+          src="https://www.svgrepo.com/show/475656/google-color.svg"
+          className="w-5"
+        />
+        Continue with Google
+      </button>
+
+      {/* DEMO LOGIN */}
+      <div className="flex gap-5 mt-5">
         <button
           type="button"
           onClick={() => {
@@ -129,7 +194,7 @@ const Login = () => {
           className="w-full mt-6 bg-gray-300 hover:bg-gray-600 hover:text-white
                      font-semibold py-2 rounded-lg hover:scale-105 transition"
         >
-          🚀 Use HR Account <br />
+          🚀 Use Demo HR <br />
           <span className="text-xs">(Click Here to Prefill)</span>
         </button>
 
@@ -142,7 +207,7 @@ const Login = () => {
           className="w-full mt-6 bg-gray-300 hover:bg-gray-600 hover:text-white
                      font-semibold py-2 rounded-lg hover:scale-105 transition"
         >
-          🚀 Use Employee Account <br />
+          🚀 Use Demo Employee <br />
           <span className="text-xs">(Click Here to Prefill)</span>
         </button>
       </div>
