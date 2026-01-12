@@ -46,11 +46,11 @@ const Testimonials = ({ testimonialsPromise }) => {
                 key={s.id}
                 className="flex flex-col items-center bg-blue-100 p-6 rounded-lg border border-base-200 shadow-sm"
               >
-                <div className="text-2xl font-extrabold text-gray-900">
+                <div className="text-4xl font-extrabold text-gray-900">
                   {s.value.toLocaleString()}
                   {s.id === "fulfillment" && "%"}
                 </div>
-                <div className="mt-2 text-sm">{s.label}</div>
+                <div className="mt-3 text-lg font-medium">{s.label}</div>
               </div>
             ))}
           </div>

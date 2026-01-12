@@ -86,7 +86,7 @@
     { "id": "companies", "label": "Companies Trust Us", "value": "120+" },
     { "id": "assets", "label": "Assets Tracked", "value": "8400+" },
     { "id": "fulfillment", "label": "Request Fulfillment (%)", "value": 97 },
-    { "id": "uptime", "label": "Avg. HR Time Saved (hrs/mo)", "value": 28 }
+    { "id": "uptime", "label": "Avg. HR Time Saved", "value": "28 hrs/m" }
   ],
 
   "trust_logos": [
