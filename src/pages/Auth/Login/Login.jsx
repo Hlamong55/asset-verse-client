@@ -171,7 +171,7 @@ const Login = () => {
           <button
             type="button"
             onClick={() => {
-              setValue("email", "hilltech@gmail.com");
+              setValue("email", "hilltech@admin.com");
               setValue("password", "12345hill@");
             }}
             className="w-full bg-gray-300 hover:bg-gray-600 hover:text-white
